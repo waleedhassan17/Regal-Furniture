@@ -8,8 +8,7 @@ import { ProductPreview } from "@/features/landing/components/product-preview"
 import { RegistrationCta } from "@/features/landing/components/registration-cta"
 import {
   AboutSection,
-  CapabilityStrip,
-  MissionBand,
+  CapabilitiesSection,
   PlatformSection,
   RolesSection,
   SecuritySection,
@@ -30,13 +29,12 @@ export function LandingPage() {
       <SiteHeader />
       <main className="flex-1">
         <Hero />
-        <CapabilityStrip />
         <PlatformSection />
+        <CapabilitiesSection />
         <WorkflowSection />
         <RolesSection />
         <SecuritySection />
         <AboutSection />
-        <MissionBand />
         <CtaBand />
       </main>
       <SiteFooter />
@@ -76,38 +74,49 @@ function SiteHeader() {
 
 function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="bg-paper">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-5 pt-14 pb-16 sm:px-8 sm:pt-20 sm:pb-24 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
-        <div>
-          <p className="text-sm font-medium text-stone">Regal Furnitures · Order management</p>
-          <h1 id="hero-title" className="mt-5 text-[2.375rem] leading-[1.06] font-semibold tracking-[-0.035em] text-ink sm:text-[3.25rem]">
-            Furniture, faithfully made.
-            <span className="block text-stone">Orders, faithfully delivered.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-[1.125rem] leading-relaxed text-stone">
-            The order portal for Regal Furnitures. Plan, track and deliver orders for homes, schools and offices — with deadline
-            reminders for the office and simple progress updates for the factory floor.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg">
-              <Link href="/login">
-                Sign in <ArrowRight aria-hidden="true" />
-              </Link>
-            </Button>
-            <Suspense fallback={null}>
-              <RegistrationCta variant="hero" />
-            </Suspense>
-          </div>
-          <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone">
-            {["Role-based access", "Works on any phone", "Every change recorded"].map((point) => (
-              <li key={point} className="flex items-center gap-2">
-                <Check aria-hidden="true" className="size-4 text-ink" />
-                {point}
-              </li>
-            ))}
-          </ul>
+    <section aria-labelledby="hero-title" className="relative isolate bg-paper">
+      <div className="mx-auto w-full max-w-7xl px-5 pt-16 text-center sm:px-8 sm:pt-24 lg:pt-28">
+        <p className="text-sm font-semibold text-regal">Regal Furnitures · Order management</p>
+        <h1
+          id="hero-title"
+          className="mx-auto mt-5 max-w-5xl text-[2.5rem] leading-[1.04] font-semibold tracking-[-0.04em] text-balance text-ink sm:text-[3.5rem] lg:text-[4rem]"
+        >
+          Furniture, faithfully made.
+          <span className="block text-stone">Orders, faithfully delivered.</span>
+        </h1>
+        <p className="mx-auto mt-7 max-w-2xl text-[1.125rem] leading-relaxed text-pretty text-stone sm:text-[1.1875rem]">
+          The order portal for Regal Furnitures. Plan, track and deliver orders for homes, schools and offices — with deadline
+          reminders for the office and simple progress updates for the factory floor.
+        </p>
+        <div className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <Button asChild size="lg">
+            <Link href="/login">
+              Sign in <ArrowRight aria-hidden="true" />
+            </Link>
+          </Button>
+          <Suspense fallback={null}>
+            <RegistrationCta variant="hero" />
+          </Suspense>
         </div>
-        <ProductPreview />
+        <ul className="mt-8 flex flex-wrap justify-center gap-x-7 gap-y-2 text-sm text-stone">
+          {["Role-based access", "Works on any phone", "Every change recorded"].map((point) => (
+            <li key={point} className="flex items-center gap-2">
+              <Check aria-hidden="true" className="size-4 text-ink" />
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="relative mt-14 sm:mt-20">
+        {/* The product sits on a warm stage marked with the hexagon of the Regal mark. */}
+        <div aria-hidden="true" className="absolute inset-x-0 top-[18%] bottom-0 -z-10 overflow-hidden border-t border-line bg-bone">
+          <HexOutline strokeWidth={1.2} className="absolute top-8 -left-44 hidden size-[22rem] text-sand xl:block" />
+          <HexOutline strokeWidth={1.2} className="absolute top-24 -right-44 hidden size-[22rem] text-sand xl:block" />
+        </div>
+        <div className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-8 sm:pb-24">
+          <ProductPreview />
+        </div>
       </div>
     </section>
   )

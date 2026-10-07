@@ -36,7 +36,7 @@ npm run db:seed:clear
 1. Go to vercel.com → **Add New… → Project**, and import the GitHub repository.
 2. Leave the defaults: Framework **Next.js**, Root Directory `./`, the default build command and the default output.
 3. Before the first deploy, open **Environment Variables** and add the variables in step 4.
-4. Under **Settings → Functions → Function Region**, choose the region closest to your Supabase project. For example, if Supabase is in Mumbai (`ap-south-1`), choose Mumbai (`bom1`). This keeps pages fast for users in Pakistan.
+4. The server code runs next to the database. `vercel.json` pins it to Sydney (`syd1`), because Regal's Supabase project is in Sydney (`ap-southeast-2`). Every page makes several database calls, so a far-away region slows every page. If you ever move the database, change the region in `vercel.json` to match. For example, Mumbai (`ap-south-1`) pairs with `bom1`.
 5. Click **Deploy**.
 
 ## 4. Environment variables on Vercel
@@ -48,7 +48,7 @@ npm run db:seed:clear
 | `NEXT_PUBLIC_SUPABASE_URL` | same as in `.env.local` | |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | same as in `.env.local` | Safe to expose to the browser |
 | `SUPABASE_SERVICE_ROLE_KEY` | same as in `.env.local` | Needed by the Team page to create and deactivate accounts. Mark it **Sensitive**. |
-| `NEXT_PUBLIC_SITE_URL` | your production address, e.g. `https://orders.regalpk.com` | Used in WhatsApp links. No trailing slash. |
+| `NEXT_PUBLIC_SITE_URL` | your production address, e.g. `https://orders.regalpk.com` | **Optional.** WhatsApp links already use the address the portal was opened on. Set this only to force one address, such as a custom domain. No trailing slash. |
 | `REGISTRATION_CODE` | a long random phrase you choose | **Recommended.** The one-time company registration asks for it, so nobody else can register before you. Mark it **Sensitive**. |
 
 **Do NOT add these to Vercel.** They are only for scripts run from your computer:

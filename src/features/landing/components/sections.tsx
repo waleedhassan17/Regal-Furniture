@@ -1,63 +1,79 @@
 import Link from "next/link"
 import {
   ArrowRight,
-  Bell,
+  Building2,
+  Camera,
   Check,
-  ClipboardList,
-  FileText,
+  Factory,
   History,
   LockKeyhole,
-  MessageCircle,
+  MessageSquareText,
+  Search,
   ShieldCheck,
   Sofa,
   UserCheck,
+  UserCog,
   Users,
   Wallet,
 } from "lucide-react"
-import { Pill } from "@/components/data/status-badge"
+import { cn } from "@/lib/utils"
 import { loginHref } from "@/features/auth/roles"
-import { FactoryVisual, RemindersVisual, SharingVisual } from "@/features/landing/components/feature-visuals"
+import {
+  FactoryViewVisual,
+  FactoryVisual,
+  OfficeViewVisual,
+  RemindersVisual,
+  SharingVisual,
+} from "@/features/landing/components/feature-visuals"
 
-function SectionHeading({ id, title, text, center }: { id: string; title: string; text?: string; center?: boolean }) {
+export function Container({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={cn("mx-auto w-full max-w-7xl px-5 sm:px-8", className)}>{children}</div>
+}
+
+function SectionHeading({
+  id,
+  label,
+  title,
+  text,
+  dark,
+}: {
+  id: string
+  label?: string
+  title: string
+  text?: string
+  dark?: boolean
+}) {
   return (
-    <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <h2 id={id} className="text-[1.875rem] leading-tight font-semibold tracking-tight text-ink sm:text-[2.25rem]">
+    <div className="max-w-2xl">
+      {label && <p className={cn("mb-4 text-sm font-semibold", dark ? "text-white/65" : "text-regal")}>{label}</p>}
+      <h2
+        id={id}
+        className={cn(
+          "text-[2rem] leading-[1.1] font-semibold tracking-[-0.03em] text-balance sm:text-[2.625rem]",
+          dark ? "text-white" : "text-ink"
+        )}
+      >
         {title}
       </h2>
-      {text && <p className="mt-4 text-[1.0625rem] leading-relaxed text-stone">{text}</p>}
+      {text && (
+        <p className={cn("mt-5 text-[1.0625rem] leading-relaxed text-pretty sm:text-[1.125rem]", dark ? "text-sidebar-muted" : "text-stone")}>
+          {text}
+        </p>
+      )}
     </div>
   )
 }
 
-function Container({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-7xl px-5 sm:px-8 ${className ?? ""}`}>{children}</div>
-}
-
-// ---------------------------------------------------------------------------
-
-const CAPABILITIES = [
-  { icon: ClipboardList, label: "Orders and items" },
-  { icon: Users, label: "Clients" },
-  { icon: Bell, label: "Deadline reminders" },
-  { icon: Wallet, label: "Payments" },
-  { icon: FileText, label: "Job sheets" },
-  { icon: MessageCircle, label: "WhatsApp sharing" },
-]
-
-export function CapabilityStrip() {
+function CheckList({ points, className }: { points: string[]; className?: string }) {
   return (
-    <section aria-label="What the portal covers" className="border-y border-line bg-canvas">
-      <Container className="py-8">
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
-          {CAPABILITIES.map(({ icon: Icon, label }) => (
-            <li key={label} className="flex items-center gap-3 text-sm font-medium text-ink">
-              <Icon aria-hidden="true" className="size-[18px] shrink-0 text-stone" />
-              {label}
-            </li>
-          ))}
-        </ul>
-      </Container>
-    </section>
+    <ul className={cn("flex flex-col gap-3", className)}>
+      {points.map((point) => (
+        <li key={point} className="flex items-start gap-3 text-[0.9375rem] text-ink">
+          <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-ink" />
+          {point}
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -87,31 +103,61 @@ const FEATURES = [
 export function PlatformSection() {
   return (
     <section id="platform" aria-labelledby="platform-title" className="scroll-mt-20 bg-paper">
-      <Container className="py-20 sm:py-24">
+      <Container className="py-24 sm:py-32">
         <SectionHeading
           id="platform-title"
+          label="Platform"
           title="Built around how Regal works"
           text="From the first call with a client to the final payment — one system the office and the factory both use."
         />
-        <div className="mt-16 flex flex-col gap-20 sm:gap-24">
+        <div className="mt-16 flex flex-col gap-20 sm:mt-20 sm:gap-28">
           {FEATURES.map((feature, index) => (
-            <div key={feature.title} className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div key={feature.title} className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
               <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
-                <h3 className="text-[1.5rem] leading-snug font-semibold tracking-tight text-ink">{feature.title}</h3>
-                <p className="mt-3 leading-relaxed text-stone">{feature.text}</p>
-                <ul className="mt-6 flex flex-col gap-3">
-                  {feature.points.map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-[0.9375rem] text-ink">
-                      <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-[var(--st-done-dot)]" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="text-[1.625rem] leading-tight font-semibold tracking-[-0.02em] text-balance text-ink sm:text-[1.875rem]">
+                  {feature.title}
+                </h3>
+                <p className="mt-4 text-[1.0625rem] leading-relaxed text-pretty text-stone">{feature.text}</p>
+                <CheckList points={feature.points} className="mt-7" />
               </div>
               <div className={index % 2 === 1 ? "lg:order-1" : undefined}>{feature.visual}</div>
             </div>
           ))}
         </div>
+      </Container>
+    </section>
+  )
+}
+
+// ---------------------------------------------------------------------------
+
+const CAPABILITIES = [
+  { icon: Users, title: "Clients and history", text: "Every client's details and past orders in one place, with tap-to-call from any phone." },
+  { icon: Wallet, title: "Payments and balances", text: "Record each payment and see what is still to collect. Visible to the office only." },
+  { icon: Camera, title: "Item photos", text: "Reference photos taken on the phone, stored privately and printed on the job sheet." },
+  { icon: MessageSquareText, title: "Notes log", text: "A running log on every order, showing who wrote each note and when." },
+  { icon: Search, title: "Search and archive", text: "Find any order by client, phone, order or bill number. Archive finished work." },
+  { icon: UserCog, title: "Team accounts", text: "Add people, choose their role, and switch off access the day they leave." },
+]
+
+export function CapabilitiesSection() {
+  return (
+    <section aria-labelledby="capabilities-title" className="border-y border-line bg-bone">
+      <Container className="py-24 sm:py-28">
+        <SectionHeading
+          id="capabilities-title"
+          title="Everything else, built in"
+          text="The everyday details of the order book, kept together instead of scattered across chat threads."
+        />
+        <ul className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+          {CAPABILITIES.map(({ icon: Icon, title, text }) => (
+            <li key={title} className="bg-paper p-7 sm:p-8">
+              <Icon aria-hidden="true" className="size-5 text-regal" />
+              <h3 className="mt-5 text-[1.0625rem] font-semibold tracking-tight text-ink">{title}</h3>
+              <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{text}</p>
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   )
@@ -128,24 +174,34 @@ const STEPS = [
 
 export function WorkflowSection() {
   return (
-    <section id="workflow" aria-labelledby="workflow-title" className="scroll-mt-20 border-y border-line bg-canvas">
-      <Container className="py-20 sm:py-24">
-        <SectionHeading id="workflow-title" title="From order to delivery" text="Every order follows the same clear path, and every step is recorded." />
-        <ol className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((step, index) => (
-            <li key={step.title} className="rounded-xl border border-line bg-paper p-6">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex size-9 items-center justify-center rounded-full border border-line-strong text-sm font-semibold text-ink tabular">
-                  {index + 1}
-                </span>
-                <Pill tone={step.who === "Office" ? "track" : "progress"} size="sm" dot={false}>
+    <section id="workflow" aria-labelledby="workflow-title" className="scroll-mt-20 bg-paper">
+      <Container className="py-24 sm:py-32">
+        <SectionHeading
+          id="workflow-title"
+          label="How it works"
+          title="From order to delivery"
+          text="Every order follows the same clear path, and every step is recorded."
+        />
+        <ol className="mt-14 grid grid-cols-1 gap-10 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {STEPS.map((step, index) => {
+            const WhoIcon = step.who === "Office" ? Building2 : Factory
+            return (
+              <li key={step.title}>
+                <div className="flex items-center gap-4">
+                  <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white tabular">
+                    {index + 1}
+                  </span>
+                  {index < STEPS.length - 1 && <span aria-hidden="true" className="hidden h-px flex-1 bg-line-strong lg:block" />}
+                </div>
+                <p className="mt-6 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-stone">
+                  <WhoIcon aria-hidden="true" className="size-3.5" />
                   {step.who}
-                </Pill>
-              </div>
-              <h3 className="mt-5 text-[1.0625rem] font-semibold tracking-tight text-ink">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-stone">{step.text}</p>
-            </li>
-          ))}
+                </p>
+                <h3 className="mt-2 text-[1.1875rem] font-semibold tracking-tight text-ink">{step.title}</h3>
+                <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{step.text}</p>
+              </li>
+            )
+          })}
         </ol>
       </Container>
     </section>
@@ -161,6 +217,7 @@ const ROLE_CARDS = [
     text: "Owners and office staff run orders, clients and money.",
     points: ["Create and edit orders with photos", "Clients, payments and balances", "Team accounts and reminder settings", "Archive and restore orders"],
     cta: "Sign in as Office & admin",
+    visual: <OfficeViewVisual />,
   },
   {
     role: "staff" as const,
@@ -168,33 +225,39 @@ const ROLE_CARDS = [
     text: "Workshop staff see the work and report progress — never the money.",
     points: ["Today's priorities on the dashboard", "Update order and item status", "Add notes and see reference photos", "Print job sheets"],
     cta: "Sign in as Factory staff",
+    visual: <FactoryViewVisual />,
   },
 ]
 
 export function RolesSection() {
   return (
-    <section aria-labelledby="roles-title" className="bg-paper">
-      <Container className="py-20 sm:py-24">
-        <SectionHeading id="roles-title" title="One portal, two clear roles" text="Everyone sees exactly what they need. Roles are set by the office on each account." />
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <section aria-labelledby="roles-title" className="border-y border-line bg-bone">
+      <Container className="py-24 sm:py-32">
+        <SectionHeading
+          id="roles-title"
+          title="One portal, two clear roles"
+          text="The same order, seen two ways. The office sets each person's role, and the database enforces it."
+        />
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-0">
           {ROLE_CARDS.map((card) => (
-            <div key={card.role} className="flex flex-col rounded-2xl border border-line bg-paper p-7 sm:p-8">
-              <h3 className="text-[1.375rem] font-semibold tracking-tight text-ink">{card.title}</h3>
-              <p className="mt-2 text-stone">{card.text}</p>
-              <ul className="mt-6 flex flex-1 flex-col gap-3 border-t border-line pt-6">
-                {card.points.map((point) => (
-                  <li key={point} className="flex items-start gap-3 text-[0.9375rem] text-ink">
-                    <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-stone" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href={loginHref(card.role)}
-                className="mt-8 inline-flex items-center gap-2 self-start text-sm font-semibold text-regal underline-offset-4 hover:text-crimson hover:underline"
-              >
-                {card.cta} <ArrowRight aria-hidden="true" className="size-4" />
-              </Link>
+            <div
+              key={card.role}
+              className="flex flex-col overflow-hidden rounded-2xl border border-line bg-paper lg:row-span-2 lg:grid lg:grid-rows-subgrid"
+            >
+              <div aria-hidden="true" className="border-b border-line bg-canvas p-5 select-none sm:p-8">
+                {card.visual}
+              </div>
+              <div className="flex flex-1 flex-col p-7 sm:p-8">
+                <h3 className="text-[1.375rem] font-semibold tracking-tight text-ink">{card.title}</h3>
+                <p className="mt-2 text-stone">{card.text}</p>
+                <CheckList points={card.points} className="mt-6 flex-1" />
+                <Link
+                  href={loginHref(card.role)}
+                  className="mt-8 inline-flex items-center gap-2 self-start text-sm font-semibold text-regal underline-offset-4 hover:text-crimson hover:underline"
+                >
+                  {card.cta} <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
+              </div>
             </div>
           ))}
         </div>
@@ -214,19 +277,25 @@ const SECURITY = [
 
 export function SecuritySection() {
   return (
-    <section id="security" aria-labelledby="security-title" className="scroll-mt-20 border-t border-line bg-canvas">
-      <Container className="py-20 sm:py-24">
-        <SectionHeading id="security-title" title="Secure by design" text="Regal's orders, clients and payments stay with the people who need them." />
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {SECURITY.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="rounded-xl border border-line bg-paper p-6">
-              <span className="inline-flex size-10 items-center justify-center rounded-lg border border-line bg-subtle">
-                <Icon aria-hidden="true" className="size-[18px] text-ink" />
-              </span>
-              <h3 className="mt-5 text-[1rem] font-semibold tracking-tight text-ink">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-stone">{text}</p>
-            </div>
-          ))}
+    <section id="security" aria-labelledby="security-title" className="scroll-mt-20 bg-ink">
+      <Container className="py-24 sm:py-32">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+          <SectionHeading
+            dark
+            id="security-title"
+            label="Security"
+            title="Secure by design"
+            text="Regal's orders, clients and payments stay with the people who need them. The access rules live in the database itself, so they hold on every screen and every device."
+          />
+          <ul className="grid grid-cols-1 gap-px self-start overflow-hidden rounded-2xl border border-sidebar-border bg-sidebar-border sm:grid-cols-2">
+            {SECURITY.map(({ icon: Icon, title, text }) => (
+              <li key={title} className="bg-ink p-7">
+                <Icon aria-hidden="true" className="size-5 text-bone" />
+                <h3 className="mt-5 text-[1.0625rem] font-semibold tracking-tight text-white">{title}</h3>
+                <p className="mt-2 text-[0.9375rem] leading-relaxed text-sidebar-muted">{text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>
@@ -245,45 +314,36 @@ const PILLARS = [
 
 export function AboutSection() {
   return (
-    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 border-t border-line bg-paper">
-      <Container className="py-20 sm:py-24">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 bg-paper">
+      <Container className="py-24 sm:py-32">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
           <div>
-            <h2 id="about-title" className="text-[1.875rem] leading-tight font-semibold tracking-tight text-ink sm:text-[2.25rem]">
-              A house for every life stage.
-            </h2>
-            <p className="mt-5 leading-relaxed text-stone">
+            <SectionHeading id="about-title" label="About Regal" title="A house for every life stage." />
+            <p className="mt-5 text-[1.0625rem] leading-relaxed text-pretty text-stone">
               Regal Furnitures is a Pakistani furniture house designing for homes, classrooms and offices. From a child&apos;s first
               study desk to a boardroom that closes the deal, every piece is crafted with patient skill — and carries the same
               promise: durability, comfort and timeless form.
             </p>
-            <p className="mt-6 flex items-center gap-2 text-sm font-medium text-ink">
+            <p className="mt-7 flex items-center gap-2 text-sm font-semibold text-ink">
               <Sofa aria-hidden="true" className="size-4 text-stone" />
               Homes · Schools · Offices
             </p>
           </div>
-          <dl className="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
+          <dl className="grid grid-cols-1 gap-x-10 gap-y-9 self-center sm:grid-cols-2">
             {PILLARS.map((pillar) => (
               <div key={pillar.name} className="border-t border-line-strong pt-5">
-                <dt className="text-[1.0625rem] font-semibold tracking-tight text-ink">{pillar.name}</dt>
-                <dd className="mt-1.5 text-sm leading-relaxed text-stone">{pillar.text}</dd>
+                <dt className="text-[1.125rem] font-semibold tracking-tight text-ink">{pillar.name}</dt>
+                <dd className="mt-1.5 text-[0.9375rem] leading-relaxed text-stone">{pillar.text}</dd>
               </div>
             ))}
           </dl>
         </div>
-      </Container>
-    </section>
-  )
-}
-
-export function MissionBand() {
-  return (
-    <section aria-label="Our mission" className="bg-ink">
-      <Container className="py-16 text-center sm:py-20">
-        <blockquote className="mx-auto max-w-3xl text-[1.625rem] leading-snug font-medium tracking-tight text-bone sm:text-[2.25rem]">
-          &ldquo;To furnish Pakistan with pieces worth keeping.&rdquo;
-        </blockquote>
-        <p className="mt-5 text-sm text-sidebar-muted">The Regal mission</p>
+        <figure className="mt-20 border-t border-line pt-16 text-center sm:mt-28 sm:pt-20">
+          <blockquote className="mx-auto max-w-3xl text-[1.75rem] leading-snug font-medium tracking-[-0.02em] text-balance text-ink sm:text-[2.5rem]">
+            &ldquo;To furnish Pakistan with pieces worth keeping.&rdquo;
+          </blockquote>
+          <figcaption className="mt-5 text-sm font-medium text-stone">The Regal mission</figcaption>
+        </figure>
       </Container>
     </section>
   )
