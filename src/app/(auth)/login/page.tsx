@@ -3,6 +3,8 @@ import { Suspense } from "react"
 import { LoginForm, type LoginNotice } from "@/features/auth/components/login-form"
 import { RoleChooser } from "@/features/auth/components/role-chooser"
 import { parseSignInRole } from "@/features/auth/roles"
+import { isRegistrationOpen } from "@/features/company/queries"
+import Link from "next/link"
 import { FormAlert } from "@/components/ui/field"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -13,6 +15,7 @@ const NOTICES: Record<string, LoginNotice> = {
   "signed-out": { tone: "info", text: "You've been signed out." },
   link: { tone: "error", text: "That link has expired or was already used. Request a new one from “Forgot your password?”." },
   "password-updated": { tone: "success", text: "Your password has been updated. Sign in with your new password." },
+  registered: { tone: "success", text: "Your company is registered. Sign in with the account you just created." },
 }
 
 export default function LoginPage(props: PageProps<"/login">) {
@@ -46,6 +49,14 @@ async function Login({ searchParams }: { searchParams: PageProps<"/login">["sear
       <p className="mt-6 text-caption leading-relaxed text-stone">
         Your role is set on your account by the office. If you don&apos;t have an account yet, ask an admin at Regal.
       </p>
+      {(await isRegistrationOpen()) && (
+        <p className="mt-6 rounded-lg border border-line bg-subtle px-4 py-3 text-sm text-ink">
+          Setting up the portal for the first time?{" "}
+          <Link href="/register" className="font-semibold text-regal underline-offset-4 hover:underline">
+            Register your company
+          </Link>
+        </p>
+      )}
     </div>
   )
 }

@@ -62,6 +62,53 @@ export type Database = {
           },
         ]
       }
+      company: {
+        Row: {
+          id: number
+          name: string
+          phone: string | null
+          email: string | null
+          address: string | null
+          city: string | null
+          website: string | null
+          registered_by: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          name: string
+          phone?: string | null
+          email?: string | null
+          address?: string | null
+          city?: string | null
+          website?: string | null
+          registered_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          name?: string
+          phone?: string | null
+          email?: string | null
+          address?: string | null
+          city?: string | null
+          website?: string | null
+          registered_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_registered_by_fkey"
+            columns: ["registered_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       order_finance: {
         Row: {
           order_id: string
@@ -524,6 +571,14 @@ export type Database = {
       dashboard_summary: {
         Args: never
         Returns: { overdue: number | null; due_soon: number | null; needs_to_start: number | null; on_track: number | null; in_production: number | null; ready_for_delivery: number | null; delivered_this_month: number | null; outstanding_balance: number | null; orders_with_balance: number | null }[]
+      }
+      register_company: {
+        Args: { p_owner_id: string; p_owner_name: string; p_owner_phone: string; p_company_name: string; p_company_phone: string; p_company_email: string; p_company_address: string; p_company_city: string; p_company_website: string }
+        Returns: undefined
+      }
+      registration_open: {
+        Args: never
+        Returns: boolean
       }
       save_order: {
         Args: { payload: Json }

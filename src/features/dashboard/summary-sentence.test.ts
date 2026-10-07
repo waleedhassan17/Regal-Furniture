@@ -2,6 +2,9 @@ import { describe, expect, it } from "vitest"
 import { summarySentence } from "@/features/dashboard/summary-sentence"
 
 describe("summarySentence", () => {
+  it("says so when there are no open orders at all", () => {
+    expect(summarySentence({ overdue: 0, dueSoon: 0, needsToStart: 0, onTrack: 0 }, 3)).toBe("There are no open orders yet.")
+  })
   it("says all clear when nothing needs attention", () => {
     expect(summarySentence({ overdue: 0, dueSoon: 0, needsToStart: 0 }, 3)).toBe(
       "Nothing needs attention right now. Every open order is on track."

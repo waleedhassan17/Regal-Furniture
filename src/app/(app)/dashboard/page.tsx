@@ -12,24 +12,33 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { StatCard } from "@/components/data/stat-card"
 import { PageHeader } from "@/components/shell/page-header"
 import { EmptyState } from "@/components/data/empty-state"
-import { getDashboardSummary, getNeedsAttention, getNextDeadline } from "@/features/dashboard/queries"
+import { getDashboardSummary, getNeedsAttention, getNextDeadline, getSetupProgress } from "@/features/dashboard/queries"
+import { GettingStarted } from "@/features/dashboard/components/getting-started"
 import { summarySentence } from "@/features/dashboard/summary-sentence"
 import { AttentionList } from "@/features/dashboard/components/attention-list"
 import { getSettings } from "@/features/settings/queries"
 
 export const metadata: Metadata = { title: "Dashboard" }
 
-export default function DashboardPage() {
+export default function DashboardPage(props: PageProps<"/dashboard">) {
   return (
     <Suspense fallback={<DashboardSkeleton />}>
-      <Dashboard />
+      <Dashboard searchParams={props.searchParams} />
     </Suspense>
   )
 }
 
-async function Dashboard() {
+async function Dashboard({ searchParams }: { searchParams: PageProps<"/dashboard">["searchParams"] }) {
   const user = await requireUser()
-  const [summary, attention, settings, next] = await Promise.all([getDashboardSummary(), getNeedsAttention(), getSettings(), getNextDeadline()])
+  const [summary, attention, settings, next, setup, params] = await Promise.all([
+    getDashboardSummary(),
+    getNeedsAttention(),
+    getSettings(),
+    getNextDeadline(),
+    user.isAdmin ? getSetupProgress() : Promise.resolve(null),
+    searchParams,
+  ])
+  const showGettingStarted = setup !== null && setup.orders === 0
   const needsAttention = summary.overdue + summary.dueSoon + summary.needsToStart
   const dueWindow = settings.dueSoonDays === 0 ? "Due today" : `Within ${settings.dueSoonDays} ${settings.dueSoonDays === 1 ? "day" : "days"}`
 
@@ -41,6 +50,8 @@ async function Dashboard() {
         description={summarySentence(summary, settings.dueSoonDays)}
         actions={<p className="text-sm text-stone">{longToday()}</p>}
       />
+
+      {showGettingStarted && <GettingStarted progress={setup} welcome={params.welcome === "1"} />}
 
       <section aria-label="Order counts" className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 2xl:grid-cols-6">
         <StatCard label="Overdue" value={summary.overdue} href="/orders?attention=overdue" icon={AlarmClock} tone="overdue" hint="Deadline has passed" />

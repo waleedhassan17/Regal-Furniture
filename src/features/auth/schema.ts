@@ -1,11 +1,7 @@
 import { z } from "zod"
+import { newPassword, PASSWORD_MIN, requiredEmail as emailField } from "@/lib/validation/fields"
 
-const emailField = z
-  .string()
-  .trim()
-  .toLowerCase()
-  .min(1, "Enter your email address.")
-  .pipe(z.email("Enter a valid email address."))
+export { PASSWORD_MIN }
 
 export const signInSchema = z.object({
   email: emailField,
@@ -20,14 +16,9 @@ export const forgotPasswordSchema = z.object({
 })
 export type ForgotPasswordInput = z.input<typeof forgotPasswordSchema>
 
-export const PASSWORD_MIN = 8
-
 export const newPasswordSchema = z
   .object({
-    password: z
-      .string()
-      .min(PASSWORD_MIN, `Use at least ${PASSWORD_MIN} characters.`)
-      .max(72, "Use 72 characters or fewer."),
+    password: newPassword,
     confirm: z.string(),
   })
   .refine((v) => v.password === v.confirm, { path: ["confirm"], message: "The passwords don't match." })

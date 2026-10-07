@@ -12,13 +12,13 @@ Internal order-tracking portal for Regal Furnitures (Pakistani furniture maker).
 - `npm run dev` · `npm run build` · `npm run lint` · `npm run typecheck` · `npm run test`
 - `npm run db:migrate` — apply new files in `supabase/migrations/` to the project in `DATABASE_URL`
 - `npm run db:types` — regenerate `src/types/database.ts` from the live schema
-- `npm run create-admin` — first admin from `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`
+- `npm run create-admin` — optional: first admin from `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` (normally the owner registers the company at `/register`)
 - `npm run db:seed` / `npm run db:seed:clear` — demo data (rows flagged `is_seed`); never clear without asking the owner
 - `npm run rls:check` — signs in as admin / staff / no-profile users and asserts what each can reach
 - `npm run db:check-dashboard` — recomputes dashboard numbers with independent SQL and compares
 
 ## Folder conventions
-- `src/app/page.tsx` public landing page; `src/app/(auth)` role choice, login + password flows; `src/app/(app)` the signed-in portal; route files stay thin.
+- `src/app/page.tsx` public landing page (`src/features/landing`); `src/app/(auth)` role choice, one-time company registration (`/register`), login + password flows; `src/app/(app)` the signed-in portal; route files stay thin.
 - `src/features/<feature>/` — `components/`, `actions.ts` (server actions), `queries.ts` (server reads), `schema.ts` (Zod, shared client/server).
 - `src/components/ui` shadcn primitives (restyled); `src/components/{shell,brand,data}` shared app pieces.
 - `src/lib/supabase/{server,browser,proxy,admin}.ts`; `admin.ts` is service-role and `server-only`.

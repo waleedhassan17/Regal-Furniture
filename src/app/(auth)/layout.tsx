@@ -11,13 +11,13 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="grid min-h-dvh grid-cols-1 bg-paper lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
       <div className="flex flex-col px-5 py-8 sm:px-10 lg:px-16 lg:py-12">
-        <div className="mx-auto w-full max-w-[25rem] lg:mx-0">
+        <div className="mx-auto w-full max-w-[30rem] lg:mx-0">
           <Link href="/" aria-label="Regal Furnitures — home" className="inline-block rounded-md">
             <Lockup priority className="max-w-[11rem]" />
           </Link>
         </div>
-        <main className="mx-auto flex w-full max-w-[25rem] flex-1 flex-col justify-center py-10 lg:mx-0">{children}</main>
-        <footer className="mx-auto w-full max-w-[25rem] text-caption text-stone lg:mx-0">© Regal Furnitures · Internal use only</footer>
+        <main className="mx-auto flex w-full max-w-[30rem] flex-1 flex-col justify-center py-10 lg:mx-0">{children}</main>
+        <footer className="mx-auto w-full max-w-[30rem] text-caption text-stone lg:mx-0">© Regal Furnitures · Internal use only</footer>
       </div>
 
       <aside aria-hidden="true" className="relative hidden overflow-hidden bg-regal lg:flex lg:flex-col lg:justify-between lg:p-14">

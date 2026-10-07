@@ -8,9 +8,10 @@ From this folder, run these steps in order:
 
 ```bash
 npm run db:migrate     # applies any new migrations
-npm run create-admin   # creates or keeps the first admin
 npm run rls:check      # every line should show ✓
 ```
+
+You don't need to create an admin here. After deploying, you register the company in the app (step 6). If you prefer the command line, `npm run create-admin` still works.
 
 If you loaded demo data with `npm run db:seed`, remove it before real use. This removes only the demo rows:
 
@@ -48,13 +49,14 @@ npm run db:seed:clear
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | same as in `.env.local` | Safe to expose to the browser |
 | `SUPABASE_SERVICE_ROLE_KEY` | same as in `.env.local` | Needed by the Team page to create and deactivate accounts. Mark it **Sensitive**. |
 | `NEXT_PUBLIC_SITE_URL` | your production address, e.g. `https://orders.regalpk.com` | Used in WhatsApp links. No trailing slash. |
+| `REGISTRATION_CODE` | a long random phrase you choose | **Recommended.** The one-time company registration asks for it, so nobody else can register before you. Mark it **Sensitive**. |
 
 **Do NOT add these to Vercel.** They are only for scripts run from your computer:
 
 | Name | Why it stays local |
 |---|---|
 | `DATABASE_URL` | Full database password; only `db:migrate`, `db:types` and the check scripts use it |
-| `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_ADMIN_NAME` | Used once by `create-admin` |
+| `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_ADMIN_NAME` | Only for the optional `create-admin` script |
 
 After changing variables in Vercel, redeploy (**Deployments → ⋯ → Redeploy**) so they take effect.
 
@@ -72,13 +74,14 @@ In the Supabase dashboard, open **Authentication**.
 2. In **Sign In / Providers → Email**, turn **off** "Allow new users to sign up". Only admins create accounts, from the Team page. The database already gives nothing to self-registered users, but this closes the door completely.
 3. In **Emails → SMTP Settings**, consider your email provider. Supabase's built-in email sender is limited to a few messages per hour, which is fine for occasional password resets. If staff reset passwords often, set up your own SMTP provider here, for example Gmail SMTP, Brevo or Resend.
 
-## 6. Check the live site
+## 6. Register the company and check the live site
 
-1. Open the production address. You should see the Regal sign-in page.
-2. Sign in as the admin, and check that the dashboard loads.
-3. Use **Forgot your password?** with a real mailbox. The link in the email should open "Choose a new password" on your domain.
-4. Create a staff account on the **Team** page and sign in with it on a phone. It must not show any amounts.
-5. On an order, try **Share** (WhatsApp should open) and **Job sheet** (open the print preview and choose A4).
+1. Open the production address. You should see the Regal landing page.
+2. Click **Register company**. Enter Regal's details, your own account, and the `REGISTRATION_CODE` if you set one. You're signed straight in as the owner, and registration then closes for everyone else.
+3. Follow the **Get started** checklist on the dashboard: add your team on the **Team** page, then add a client and your first order.
+4. Use **Forgot your password?** with a real mailbox. The link in the email should open "Choose a new password" on your domain.
+5. Sign in with the staff account on a phone. It must not show any amounts.
+6. On an order, try **Share** (WhatsApp should open) and **Job sheet** (open the print preview and choose A4).
 
 ## Later updates
 

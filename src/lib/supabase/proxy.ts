@@ -4,7 +4,7 @@ import { publicEnv } from "@/lib/env"
 import type { Database } from "@/types/database"
 
 /** Paths reachable without a session. */
-const PUBLIC_PATHS = ["/login", "/forgot-password", "/reset-password", "/auth/"]
+const PUBLIC_PATHS = ["/login", "/register", "/forgot-password", "/reset-password", "/auth/"]
 
 function isPublic(pathname: string) {
   return PUBLIC_PATHS.some((p) => (p.endsWith("/") ? pathname.startsWith(p) : pathname === p))
@@ -63,7 +63,7 @@ export async function updateSession(request: NextRequest) {
     return redirectWithCookies(url, response)
   }
 
-  if (signedIn && (pathname === "/login" || pathname === "/forgot-password")) {
+  if (signedIn && (pathname === "/login" || pathname === "/register" || pathname === "/forgot-password")) {
     const url = request.nextUrl.clone()
     url.pathname = "/dashboard"
     url.search = ""

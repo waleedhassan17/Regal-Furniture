@@ -144,6 +144,8 @@ async function main() {
       record(S, "cannot upload item images", !!error, error ? "refused" : "uploaded")
     }
 
+    await expectRefused(S, "cannot change company details", () => staff.from("company").update({ name: "Hacked" }).eq("id", 1).select())
+
     // --- signed in, no profile -----------------------------------------------
     const N = "No profile"
     for (const table of ["profiles", "settings", "clients", "orders", "order_items", "order_notes", "status_history", "order_finance", "payments"] as const) {
@@ -151,9 +153,29 @@ async function main() {
     }
     await expectRows(N, "reads nothing from order_overview", () => nobody.from("order_overview").select("id").limit(5), "none")
 
+    await expectRows(N, "reads nothing from company", () => nobody.from("company").select("*"), "none")
+
     // --- not signed in ---------------------------------------------------------
     const X = "Anonymous"
-    for (const table of ["clients", "orders", "order_finance", "payments", "profiles"] as const) {
+    {
+      const { data, error } = await anon.rpc("registration_open")
+      record(X, "can ask whether registration is open", !error && typeof data === "boolean", error?.message)
+    }
+    {
+      const { error } = await anon.rpc("register_company", {
+        p_owner_id: randomUUID(),
+        p_owner_name: "Intruder",
+        p_owner_phone: "",
+        p_company_name: "Intruder Co",
+        p_company_phone: "",
+        p_company_email: "",
+        p_company_address: "",
+        p_company_city: "",
+        p_company_website: "",
+      })
+      record(X, "cannot call register_company directly", !!error, error ? "refused" : "ran")
+    }
+    for (const table of ["clients", "orders", "order_finance", "payments", "profiles", "company"] as const) {
       await expectRows(X, `reads nothing from ${table}`, () => anon.from(table).select("*").limit(5), "none")
     }
   } finally {

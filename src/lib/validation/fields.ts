@@ -39,3 +39,29 @@ export const moneyInput = z
   .transform((v) => (v === "" ? null : Number(v)))
 
 export const uuid = (message = "Invalid reference.") => z.uuid({ message })
+
+/** Required email: trimmed and lower-cased before it is checked. */
+export const requiredEmail = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .min(1, "Enter your email address.")
+  .pipe(z.email("Enter a valid email address."))
+
+/** Optional email: blank becomes null. */
+export const optionalEmail = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .refine((v) => v === "" || z.email().safeParse(v).success, "Enter a valid email address, or leave it blank.")
+  .transform((v) => (v === "" ? null : v))
+  .nullable()
+  .optional()
+  .transform((v) => v ?? null)
+
+export const PASSWORD_MIN = 8
+
+export const newPassword = z
+  .string()
+  .min(PASSWORD_MIN, `Use at least ${PASSWORD_MIN} characters.`)
+  .max(72, "Use 72 characters or fewer.")

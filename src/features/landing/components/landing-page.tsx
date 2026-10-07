@@ -1,115 +1,203 @@
+import { Suspense } from "react"
 import Link from "next/link"
+import { ArrowRight, Check } from "lucide-react"
 import { Lockup } from "@/components/brand/logo"
 import { HexOutline } from "@/components/brand/hexagon"
 import { Button } from "@/components/ui/button"
-import { RoleChooser } from "@/features/auth/components/role-chooser"
+import { ProductPreview } from "@/features/landing/components/product-preview"
+import { RegistrationCta } from "@/features/landing/components/registration-cta"
+import {
+  AboutSection,
+  CapabilityStrip,
+  MissionBand,
+  PlatformSection,
+  RolesSection,
+  SecuritySection,
+  WorkflowSection,
+} from "@/features/landing/components/sections"
 
-/** Brand pillars, worded as in the Regal brand book (page 2). */
-const PILLARS = [
-  { name: "Craft", text: "Joinery and finish that outlast trends." },
-  { name: "Versatility", text: "One brand for home, school and office." },
-  { name: "Accessible", text: "Premium feel, locally-made value." },
-  { name: "Enduring", text: "Built to be inherited, not replaced." },
+const NAV = [
+  { href: "#platform", label: "Platform" },
+  { href: "#workflow", label: "How it works" },
+  { href: "#security", label: "Security" },
+  { href: "#about", label: "About Regal" },
 ]
 
-/** Public home page, laid out like the brand book cover, with sign-in as the main action. */
+/** Public home page: what the portal does, Regal's brand, and the ways in. */
 export function LandingPage() {
   return (
     <div className="flex min-h-dvh flex-col bg-paper">
-      <header className="border-b border-line">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
-          <Link href="/" aria-label="Regal Furnitures — home" className="rounded-md">
-            <Lockup priority className="max-w-[9rem]" />
-          </Link>
-          <nav aria-label="Site" className="flex items-center gap-1 sm:gap-2">
-            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-              <a href="#about">About Regal</a>
-            </Button>
-            <Button asChild variant="outline" size="sm">
-              <Link href="/login">Sign in</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
+      <SiteHeader />
       <main className="flex-1">
-        {/* Cover: tagline and sign-in on the left, Regal Red on the right (brand book, page 1). */}
-        <section className="grid grid-cols-1 lg:min-h-[36rem] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <div className="px-5 py-12 sm:px-8 sm:py-16 lg:py-20 lg:pr-16 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
-            <p className="text-sm font-medium text-stone">Regal Furnitures · Order portal</p>
-            <h1 className="mt-4 max-w-xl text-[2.25rem] leading-[1.08] font-semibold tracking-[-0.03em] text-ink sm:text-[3rem]">
-              Furniture for the way Pakistan lives, studies and works.
-            </h1>
-            <p className="mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-stone">
-              From a child&apos;s first study desk to a boardroom that closes the deal. The order portal keeps every Regal order on
-              schedule, from the office to the factory floor.
-            </p>
-
-            <div className="mt-10 max-w-xl">
-              <h2 className="text-sm font-semibold text-ink">Sign in to the order portal</h2>
-              <RoleChooser className="mt-3" />
-              <p className="mt-3 text-caption text-stone">Accounts are created by the office.</p>
-            </div>
-          </div>
-
-          <div className="relative flex min-h-56 flex-col justify-end overflow-hidden bg-regal px-5 py-10 sm:px-8 lg:min-h-0 lg:justify-center lg:px-14">
-            <HexOutline className="pointer-events-none absolute -right-48 -bottom-56 hidden size-[30rem] text-white/[0.09] lg:block" />
-            <div className="relative">
-              <Lockup tone="light" size="lg" className="hidden lg:inline-flex" />
-              <p className="max-w-sm text-[1.75rem] leading-tight font-semibold tracking-tight text-white lg:mt-10 lg:text-[2rem]">
-                Furniture, faithfully made.
-              </p>
-              <p className="mt-3 text-sm font-medium text-white/85">Homes · Schools · Offices</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" aria-labelledby="about-title" className="scroll-mt-4 border-t border-line bg-canvas">
-          <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
-            <div className="max-w-2xl">
-              <h2 id="about-title" className="text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-[2rem]">
-                A house for every life stage.
-              </h2>
-              <p className="mt-4 leading-relaxed text-stone">
-                Regal Furnitures is a Pakistani furniture house designing for homes, classrooms and offices. Every piece is crafted with
-                patient skill, and each design carries the same promise: durability, comfort and timeless form.
-              </p>
-            </div>
-            <dl className="mt-12 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-              {PILLARS.map((pillar) => (
-                <div key={pillar.name} className="border-t border-line-strong pt-5">
-                  <dt className="text-[1.0625rem] font-semibold tracking-tight text-ink">{pillar.name}</dt>
-                  <dd className="mt-1.5 text-sm leading-relaxed text-stone">{pillar.text}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-
-        {/* Brand mission band (brand book, page 2). */}
-        <section aria-label="Our mission" className="bg-ink">
-          <div className="mx-auto w-full max-w-7xl px-5 py-14 text-center sm:px-8 sm:py-16">
-            <blockquote className="text-[1.5rem] leading-snug font-medium tracking-tight text-bone sm:text-[2rem]">
-              &ldquo;To furnish Pakistan with pieces worth keeping.&rdquo;
-            </blockquote>
-            <p className="mt-4 text-sm text-sidebar-muted">Our mission</p>
-          </div>
-        </section>
+        <Hero />
+        <CapabilityStrip />
+        <PlatformSection />
+        <WorkflowSection />
+        <RolesSection />
+        <SecuritySection />
+        <AboutSection />
+        <MissionBand />
+        <CtaBand />
       </main>
-
-      <footer className="border-t border-line bg-paper">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-5 py-6 text-caption text-stone sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p>© Regal Furnitures</p>
-          <p className="flex flex-wrap gap-x-4 gap-y-1">
-            <a href="https://regalpk.com" className="hover:text-ink" rel="noopener noreferrer" target="_blank">
-              regalpk.com
-            </a>
-            <a href="mailto:regalfurnitures4@gmail.com" className="hover:text-ink">
-              regalfurnitures4@gmail.com
-            </a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
+  )
+}
+
+function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur supports-backdrop-filter:bg-paper/85">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+        <Link href="/" aria-label="Regal Furnitures — home" className="shrink-0 rounded-md">
+          <Lockup priority className="max-w-[8.5rem]" />
+        </Link>
+        <nav aria-label="Site" className="hidden items-center gap-8 lg:flex">
+          {NAV.map((item) => (
+            <a key={item.href} href={item.href} className="text-sm font-medium text-stone transition-colors hover:text-ink">
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <div className="flex shrink-0 items-center gap-2">
+          <Suspense
+            fallback={
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/login">Sign in</Link>
+              </Button>
+            }
+          >
+            <RegistrationCta variant="nav" />
+          </Suspense>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+function Hero() {
+  return (
+    <section aria-labelledby="hero-title" className="bg-paper">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-5 pt-14 pb-16 sm:px-8 sm:pt-20 sm:pb-24 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+        <div>
+          <p className="text-sm font-medium text-stone">Regal Furnitures · Order management</p>
+          <h1 id="hero-title" className="mt-5 text-[2.375rem] leading-[1.06] font-semibold tracking-[-0.035em] text-ink sm:text-[3.25rem]">
+            Furniture, faithfully made.
+            <span className="block text-stone">Orders, faithfully delivered.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-[1.125rem] leading-relaxed text-stone">
+            The order portal for Regal Furnitures. Plan, track and deliver orders for homes, schools and offices — with deadline
+            reminders for the office and simple progress updates for the factory floor.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <Button asChild size="lg">
+              <Link href="/login">
+                Sign in <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+            <Suspense fallback={null}>
+              <RegistrationCta variant="hero" />
+            </Suspense>
+          </div>
+          <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone">
+            {["Role-based access", "Works on any phone", "Every change recorded"].map((point) => (
+              <li key={point} className="flex items-center gap-2">
+                <Check aria-hidden="true" className="size-4 text-ink" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <ProductPreview />
+      </div>
+    </section>
+  )
+}
+
+function CtaBand() {
+  return (
+    <section aria-labelledby="cta-title" className="relative overflow-hidden bg-regal">
+      <HexOutline className="pointer-events-none absolute -top-40 -right-24 hidden size-[28rem] text-white/[0.08] sm:block" />
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start gap-8 px-5 py-16 sm:px-8 sm:py-20 lg:flex-row lg:items-center lg:justify-between">
+        <div className="max-w-2xl">
+          <h2 id="cta-title" className="text-[1.875rem] leading-tight font-semibold tracking-tight text-white sm:text-[2.25rem]">
+            Bring every order into one place.
+          </h2>
+          <p className="mt-3 text-[1.0625rem] text-white/90">Sign in to the portal, or register Regal Furnitures if you&apos;re setting it up.</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild size="lg" variant="outline" className="border-white bg-white text-ink hover:border-white hover:bg-bone">
+            <Link href="/login">
+              Sign in <ArrowRight aria-hidden="true" />
+            </Link>
+          </Button>
+          <Suspense fallback={null}>
+            <RegistrationCta variant="band" />
+          </Suspense>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SiteFooter() {
+  const columns: { title: string; links: { href: string; label: string; external?: boolean }[] }[] = [
+    {
+      title: "Portal",
+      links: [
+        { href: "/login", label: "Sign in" },
+        { href: "/register", label: "Register company" },
+        { href: "/forgot-password", label: "Forgot password" },
+      ],
+    },
+    {
+      title: "Platform",
+      links: [
+        { href: "#platform", label: "Features" },
+        { href: "#workflow", label: "How it works" },
+        { href: "#security", label: "Security" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { href: "#about", label: "About Regal" },
+        { href: "https://regalpk.com", label: "regalpk.com", external: true },
+        { href: "mailto:regalfurnitures4@gmail.com", label: "regalfurnitures4@gmail.com" },
+      ],
+    },
+  ]
+  return (
+    <footer className="border-t border-line bg-paper">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-5 py-14 sm:grid-cols-2 sm:px-8 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
+        <div className="max-w-xs">
+          <Lockup className="max-w-[8.5rem]" />
+          <p className="mt-4 text-sm leading-relaxed text-stone">Furniture for the way Pakistan lives, studies and works.</p>
+        </div>
+        {columns.map((column) => (
+          <div key={column.title}>
+            <p className="text-sm font-semibold text-ink">{column.title}</p>
+            <ul className="mt-4 flex flex-col gap-3">
+              {column.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="text-sm break-all text-stone transition-colors hover:text-ink"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="border-t border-line">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-5 py-6 text-caption text-stone sm:flex-row sm:justify-between sm:px-8">
+          <p>© Regal Furnitures. All rights reserved.</p>
+          <p>Order management portal · Internal use</p>
+        </div>
+      </div>
+    </footer>
   )
 }

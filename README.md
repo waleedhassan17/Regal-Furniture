@@ -2,7 +2,7 @@
 
 An internal web app where every Regal order lives in one place. Office staff enter orders with their items, photos and amounts. Factory staff update progress from their phones. The dashboard shows straight away what is overdue, what is due soon and what hasn't been started.
 
-- **Landing page and sign-in:** a branded home page, then a choice of *Office & admin* or *Factory staff* before signing in. The server checks the chosen role against the account.
+- **Landing page, registration and sign-in:** a branded home page; a one-time **Register company** setup for Regal's owner; then a choice of *Office & admin* or *Factory staff* before signing in. The server checks the chosen role against the account.
 - **Dashboard:** counts for overdue, due soon, needs to start, in production, ready and delivered this month. Below them is a "Needs attention" list, most urgent first. Admins also see the outstanding balance.
 - **Orders:**
   - search by client, phone, order or bill number
@@ -50,17 +50,17 @@ Requirements: Node.js 22.9 or newer, npm, and a Supabase project.
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase → Project Settings → API (anon / publishable key) |
    | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API (service role / secret key). **Server only.** |
    | `DATABASE_URL` | Supabase → **Connect → Session pooler** URI. URL-encode special characters in the password. Used only by the npm scripts. |
-   | `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_ADMIN_NAME` | Your choice. Used once by `npm run create-admin`. |
+   | `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_ADMIN_NAME` | Optional. Only for `npm run create-admin`. |
    | `NEXT_PUBLIC_SITE_URL` | Optional. Base URL for links shared on WhatsApp. |
+   | `REGISTRATION_CODE` | Optional. If set, company registration asks for this code. |
 
-3. Apply the database schema, generate the database types and create the first admin:
+3. Apply the database schema and generate the database types:
 
    ```bash
    npm run db:migrate
    npm run db:types
-   npm run create-admin
    ```
-4. Optionally, load the demo data:
+4. Optionally, load demo data (do this after registering, below, if you want sample orders):
 
    ```bash
    npm run db:seed
@@ -71,7 +71,9 @@ Requirements: Node.js 22.9 or newer, npm, and a Supabase project.
    npm run dev
    ```
 
-   Open http://localhost:3000, choose **Office & admin**, and sign in with `SEED_ADMIN_EMAIL`.
+6. Open http://localhost:3000 and choose **Register company**. Enter Regal's details and your own account. You become the owner (admin) and are signed straight in. Registration then closes, and you add everyone else on the **Team** page.
+
+   If you'd rather create the first admin from the command line, run `npm run create-admin` (it uses `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD`).
 
 ## Scripts
 

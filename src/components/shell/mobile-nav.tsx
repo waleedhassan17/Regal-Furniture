@@ -94,7 +94,7 @@ export function BottomNav({ user }: { user: ShellUser }) {
             {user.isAdmin && (
               <>
                 <SheetLink href="/team" icon={UserCog} label="Team" onNavigate={() => setMoreOpen(false)} />
-                <SheetLink href="/settings" icon={SlidersHorizontal} label="Reminder settings" onNavigate={() => setMoreOpen(false)} />
+                <SheetLink href="/settings" icon={SlidersHorizontal} label="Settings" onNavigate={() => setMoreOpen(false)} />
               </>
             )}
             <form action="/auth/signout" method="post">

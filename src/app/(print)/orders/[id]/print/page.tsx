@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
 import { getOrderTitle, getOrderDetail } from "@/features/orders/queries"
+import { getCompany } from "@/features/company/queries"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -37,7 +38,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
   const { id } = await params
   if (!UUID.test(id)) notFound()
   // Money is never loaded here: the job sheet goes to the factory floor.
-  const detail = await getOrderDetail(id, { isAdmin: false })
+  const [detail, company] = await Promise.all([getOrderDetail(id, { isAdmin: false }), getCompany()])
   if (!detail) notFound()
   const { order, items } = detail
   const totalPieces = items.reduce((sum, i) => sum + i.quantity, 0)
@@ -60,7 +61,10 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
         <header className="flex items-start justify-between gap-6 border-b-2 border-ink pb-4">
           <div>
             <Lockup className="max-w-[46mm]" />
-            <p className="mt-3 text-[9pt] font-bold tracking-[0.18em] text-regal uppercase">Factory job sheet</p>
+            {company && (company.phone || company.city || company.address) && (
+              <p className="mt-2 text-[8pt] text-stone">{[company.address, company.city, company.phone].filter(Boolean).join(" · ")}</p>
+            )}
+            <p className="mt-3 text-[12pt] font-semibold text-ink">Job sheet</p>
           </div>
           <div className="text-right">
             <p className="font-display text-[20pt] leading-none font-semibold tracking-tight tabular">{order.order_number}</p>

@@ -41,6 +41,7 @@ Environment variables, set by the owner in `.env.local`:
 | `DATABASE_URL` | Postgres connection string (Session pooler), used only to apply migrations and by scripts |
 | `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD` | Used once by the create-admin script |
 | `NEXT_PUBLIC_SITE_URL` | Optional; base URL for links shared on WhatsApp |
+| `REGISTRATION_CODE` | Optional; if set, the one-time company registration asks for this code |
 
 If variable names differ slightly, adapt the code to them. Read these values through the environment only. Never print them, log them, paste them into chat, or write them into any file other than `.env.local`.
 
@@ -91,7 +92,7 @@ Keep this logic in one place and cover it, along with the money calculations, wi
 
 ## 5. Roles and security
 
-Email and password login through Supabase Auth. There is no sign-up page; admins create accounts.
+Email and password login through Supabase Auth. **Company registration** (added 2026-10-08 at the owner's request) is a one-time setup: the first person to register enters the company details and their own account and becomes the owner (admin). Registration closes as soon as a company profile or any admin exists — enforced in the database (`register_company`, serialised with a lock) — and can additionally require `REGISTRATION_CODE`. After that there is no public sign-up: admins create every other account on the Team page.
 
 - **Admin** — everything. The owner and office staff, who enter orders and handle money, are admins.
 - **Staff** — factory staff. View clients, orders and items; change production status and item status; add notes. Cannot see any amounts, cannot read or write `order_finance` or `payments`, cannot create or edit orders or clients, cannot manage users or settings, cannot archive orders.
@@ -107,7 +108,7 @@ Requirements:
 
 ## 6. Screens
 
-**Landing page.** The public home page (`/`), built on the brand book: the cover split (tagline and sign-in on white, Regal Red panel with the wordmark), the four brand pillars, the mission band and contact details — and the first step of signing in, choosing a role. Signed-in visitors go straight to the dashboard. *(Added 2026-10-08 at the owner's request.)*
+**Landing page.** The public home page (`/`) with an enterprise layout built on the brand book: navigation; a hero with the brand line "Furniture, faithfully made. Orders, faithfully delivered." and an illustrative product preview on Regal Red; platform features with real interface fragments; the order-to-delivery workflow; office and factory roles (each a way into sign-in); security; the brand pillars and mission; a sign-in / register call to action; and a multi-column footer. "Register company" appears only while registration is open. Signed-in visitors go straight to the dashboard. *(Added 2026-10-08 at the owner's request.)*
 
 **Login.** Branded, split layout on desktop with the full logo lockup; clear error messages; forgot-password flow. Signing in starts by choosing a role — **Office & admin** or **Factory staff** — and the server checks that the account really has that role (a mismatch is refused with a one-tap "Continue as …" option). *(Role selection added 2026-10-08 at the owner's request; roles are still assigned only by admins.)*
 
@@ -124,9 +125,13 @@ Requirements:
 
 **Clients.** Searchable list; a client page with contact details, order history and, for admins, balance.
 
+**Register (one-time).** Company details (name, phone, city, address, email, website) and the owner's account (name, mobile, email, password). Shows "Already registered" once setup is done.
+
+**Get started (dashboard, admins).** Until the first order exists: company details, add your team, add a client, create the first order — each ticked off as it happens.
+
 **Team (admin).** Create users with a temporary password, set role, deactivate and reactivate.
 
-**Settings (admin).** Edit the three reminder thresholds.
+**Settings (admin).** Company details (shown on job sheets) and the three reminder thresholds.
 
 ## 7. Design direction
 
@@ -163,3 +168,5 @@ Read all eight pages of the brand PDF before designing anything. The interface s
 - Typeface: Inter throughout (owner's request, 2026-10-08).
 - A public landing page and a choose-your-role step before signing in (owner's request, 2026-10-08).
 - Off-white/white surfaces and restrained decoration — no accent bars, labels above titles or hexagon icon frames (owner's request, 2026-10-08).
+- One-time company registration for Regal only; staff accounts are created by admins only (owner's answers, 2026-10-08).
+- Landing page with an enterprise layout: navigation, product preview, platform features, workflow, roles, security, brand pillars, mission and a multi-column footer (owner's request, 2026-10-08).

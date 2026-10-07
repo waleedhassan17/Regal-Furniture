@@ -65,3 +65,23 @@ export async function getNextDeadline() {
   if (error) throw new Error(`getNextDeadline: ${error.message}`)
   return data
 }
+
+export type SetupProgress = {
+  hasCompany: boolean
+  teamSize: number
+  clients: number
+  orders: number
+}
+
+/** First-run progress for the "Get started" checklist (admins). */
+export async function getSetupProgress(): Promise<SetupProgress> {
+  const supabase = await createClient()
+  const [company, team, clients, orders] = await Promise.all([
+    supabase.from("company").select("id", { count: "exact", head: true }),
+    supabase.from("profiles").select("id", { count: "exact", head: true }).eq("is_active", true),
+    supabase.from("clients").select("id", { count: "exact", head: true }),
+    supabase.from("orders").select("id", { count: "exact", head: true }),
+  ])
+  for (const r of [company, team, clients, orders]) if (r.error) throw new Error(`getSetupProgress: ${r.error.message}`)
+  return { hasCompany: (company.count ?? 0) > 0, teamSize: team.count ?? 0, clients: clients.count ?? 0, orders: orders.count ?? 0 }
+}
