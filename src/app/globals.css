@@ -163,9 +163,9 @@
   --color-paper: var(--paper);
   --color-stone: var(--stone);
 
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-playfair), Georgia, "Times New Roman", serif;
-  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -177,13 +177,14 @@
   --shadow-raised: var(--shadow-raised);
 }
 
-/* Type scale — brand page 6 (Display 64/72, H1 42/48, H2 28/34, H3 18/24), tuned for screens. */
+/* Type scale — Inter throughout (the brand book pairs the identity with Inter Sans), tuned for screens. */
 @theme {
   --text-display: 3.5rem;
-  --text-display--line-height: 1.08;
-  --text-display--letter-spacing: -0.01em;
-  --text-h1: 2.25rem;
-  --text-h1--line-height: 1.15;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.035em;
+  --text-h1: 2rem;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.025em;
   --text-h2: 1.5rem;
   --text-h2--line-height: 1.25;
   --text-h3: 1.125rem;
@@ -194,7 +195,7 @@
   --text-caption--line-height: 1.35;
   --text-eyebrow: 0.6875rem;
   --text-eyebrow--line-height: 1.2;
-  --text-eyebrow--letter-spacing: 0.12em;
+  --text-eyebrow--letter-spacing: 0.1em;
 }
 
 @layer base {
@@ -243,7 +244,7 @@
   font-size: var(--text-eyebrow);
   line-height: var(--text-eyebrow--line-height);
   letter-spacing: var(--text-eyebrow--letter-spacing);
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
 }
 

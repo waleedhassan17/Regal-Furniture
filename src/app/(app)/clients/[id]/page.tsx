@@ -55,7 +55,7 @@ async function ClientContent({ params }: { params: PageProps<"/clients/[id]">["p
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="min-w-0">
           <p className="eyebrow text-regal">Client</p>
-          <h1 className="mt-2 font-heading text-[1.875rem] leading-tight font-bold text-ink sm:text-h1">{client.name}</h1>
+          <h1 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">{client.name}</h1>
           <p className="mt-2 text-sm text-stone">
             {orders.length} {orders.length === 1 ? "order" : "orders"} · {openCount} open
           </p>
@@ -126,7 +126,7 @@ async function ClientContent({ params }: { params: PageProps<"/clients/[id]">["p
               <CardContent className="flex flex-col gap-3 text-sm tabular">
                 <div>
                   <p className="text-caption font-semibold text-stone">Outstanding</p>
-                  <p className={cn("font-display text-[1.875rem] leading-tight font-bold", balances.outstanding > 0 ? "text-regal" : "text-[var(--st-done-fg)]")}>
+                  <p className={cn("font-display text-[1.75rem] leading-tight font-semibold tracking-tight", balances.outstanding > 0 ? "text-regal" : "text-[var(--st-done-fg)]")}>
                     {formatMoney(balances.outstanding)}
                   </p>
                 </div>

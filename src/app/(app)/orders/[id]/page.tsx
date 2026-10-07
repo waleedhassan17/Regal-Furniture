@@ -78,7 +78,7 @@ async function OrderContent({ params }: { params: PageProps<"/orders/[id]">["par
             Order {order.order_number}
             {order.bill_number ? ` · Bill ${order.bill_number}` : ""}
           </p>
-          <h1 className="mt-2 font-heading text-[1.875rem] leading-tight font-bold text-ink sm:text-h1">{order.client_name}</h1>
+          <h1 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">{order.client_name}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <StatusControl orderId={order.id} orderNumber={order.order_number} status={order.status} disabled={order.is_archived} />
             <DaysLeftBadge daysLeft={order.days_left} attention={order.attention_level} status={order.status} isArchived={order.is_archived} className="h-9" />

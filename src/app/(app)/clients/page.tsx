@@ -70,7 +70,7 @@ async function ClientsContent({ searchParams }: { searchParams: PageProps<"/clie
                   href={`/clients/${c.id}`}
                   className="group flex h-full items-center gap-4 rounded-xl border border-sand bg-card p-4 shadow-(--shadow-card) transition-[border-color,box-shadow] hover:border-sand-strong hover:shadow-(--shadow-raised)"
                 >
-                  <span aria-hidden="true" className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-sand-soft font-heading text-[1.125rem] font-bold text-walnut">
+                  <span aria-hidden="true" className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-sand-soft font-heading text-[1rem] font-semibold text-walnut">
                     {c.name.trim().charAt(0).toUpperCase()}
                   </span>
                   <span className="min-w-0 flex-1">

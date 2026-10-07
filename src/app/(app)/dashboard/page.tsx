@@ -38,7 +38,7 @@ async function Dashboard() {
     <div className="flex flex-col gap-8">
       <header>
         <p className="eyebrow text-regal">Today · {longToday()}</p>
-        <h1 className="mt-2 font-heading text-[1.875rem] leading-tight font-bold text-ink sm:text-h1">
+        <h1 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">
           {greeting()}, {firstName}
         </h1>
         <p className="mt-2 max-w-2xl text-[1rem] leading-relaxed text-ink">{summarySentence(summary, settings.dueSoonDays)}</p>
@@ -57,7 +57,7 @@ async function Dashboard() {
         <section aria-labelledby="attention-heading" className="overflow-hidden rounded-xl border border-sand bg-card shadow-(--shadow-card)">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-sand px-5 py-4 sm:px-6">
             <div>
-              <h2 id="attention-heading" className="font-heading text-[1.375rem] leading-tight font-bold text-ink">
+              <h2 id="attention-heading" className="font-heading text-[1.25rem] leading-tight font-semibold tracking-tight text-ink">
                 Needs attention
               </h2>
               <p className="mt-0.5 text-sm text-stone">Most urgent first</p>
@@ -106,7 +106,7 @@ async function Dashboard() {
               <Wallet aria-hidden="true" className="size-5 text-sidebar-muted" />
             </div>
             <div>
-              <p className="font-display text-[2.25rem] leading-none font-bold text-white tabular">{formatMoney(summary.outstandingBalance)}</p>
+              <p className="font-display text-[2rem] leading-none font-semibold tracking-tight text-white tabular">{formatMoney(summary.outstandingBalance)}</p>
               <p className="mt-2 text-sm text-sidebar-foreground">
                 Still to collect on {summary.ordersWithBalance ?? 0} {summary.ordersWithBalance === 1 ? "order" : "orders"}, including delivered orders not yet
                 paid in full.

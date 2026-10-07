@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Lockup, Mark } from "@/components/brand/logo"
 import { BRAND_ASSETS } from "@/components/brand/brand-assets"
 
@@ -10,7 +11,9 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
     <div className="grid grid-cols-1 min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
       <div className="flex flex-col px-5 py-8 sm:px-10 lg:px-16 lg:py-12">
         <div className="mx-auto w-full max-w-[25rem] lg:mx-0">
-          <Lockup priority className="max-w-[13rem]" />
+          <Link href="/" aria-label="Regal Furnitures — home" className="inline-block rounded-md">
+            <Lockup priority className="max-w-[13rem]" />
+          </Link>
         </div>
         <main className="mx-auto flex w-full max-w-[25rem] flex-1 flex-col justify-center py-10 lg:mx-0">{children}</main>
         <footer className="mx-auto w-full max-w-[25rem] text-caption text-stone lg:mx-0">
@@ -29,11 +32,11 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
         <p className="eyebrow relative text-white/85">Factory order portal</p>
         <div className="relative flex flex-col items-start gap-10">
           {BRAND_ASSETS.markReversed && <Mark tone="light" size={132} />}
-          <p className="max-w-md font-display text-[3.25rem] leading-[1.06] font-bold text-white xl:text-display">
+          <p className="max-w-md font-display text-[3rem] leading-[1.05] font-semibold tracking-[-0.035em] text-white xl:text-display">
             Furniture, faithfully made.
           </p>
         </div>
-        <p className="relative font-display text-[1.25rem] leading-snug text-white/90">
+        <p className="relative text-[1.125rem] leading-snug font-medium text-white/90">
           For the way Pakistan lives, studies and works.
         </p>
       </aside>

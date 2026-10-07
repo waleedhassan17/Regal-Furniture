@@ -4,6 +4,7 @@ import { headers } from "next/headers"
 import { createClient } from "@/lib/supabase/server"
 import { publicEnv } from "@/lib/env"
 import type { ActionResult } from "@/lib/actions"
+import { ROLE_TITLE, type SignInRole } from "@/features/auth/roles"
 import {
   forgotPasswordSchema,
   newPasswordSchema,
@@ -16,10 +17,14 @@ import {
 
 const GENERIC = "We couldn't sign you in right now. Please try again in a moment."
 
-export async function signIn(raw: SignInInput): Promise<ActionResult<{ next: string }>> {
+export type SignInResult =
+  | { ok: true; data: { next: string } }
+  | { ok: false; error: string; actualRole?: SignInRole }
+
+export async function signIn(raw: SignInInput): Promise<SignInResult> {
   const parsed = signInSchema.safeParse(raw)
   if (!parsed.success) return { ok: false, error: "Enter your email and password." }
-  const { email, password, next } = parsed.data
+  const { email, password, role, next } = parsed.data
 
   const supabase = await createClient()
   const { data, error } = await supabase.auth.signInWithPassword({ email, password })
@@ -32,11 +37,19 @@ export async function signIn(raw: SignInInput): Promise<ActionResult<{ next: str
     return { ok: false, error: GENERIC }
   }
 
-  // A valid login is not enough: the account needs an active profile.
-  const { data: profile } = await supabase.from("profiles").select("is_active").eq("id", data.user.id).maybeSingle()
+  // A valid login is not enough: the account needs an active profile with the chosen role.
+  const { data: profile } = await supabase.from("profiles").select("is_active, role").eq("id", data.user.id).maybeSingle()
   if (!profile?.is_active) {
     await supabase.auth.signOut()
     return { ok: false, error: "Your account isn't active. Ask an admin at Regal to give you access." }
+  }
+  if (profile.role !== role) {
+    await supabase.auth.signOut()
+    return {
+      ok: false,
+      error: `This is ${profile.role === "admin" ? "an office & admin" : "a factory staff"} account. Choose “${ROLE_TITLE[profile.role]}” to sign in.`,
+      actualRole: profile.role,
+    }
   }
 
   return { ok: true, data: { next: safeNextPath(next) } }

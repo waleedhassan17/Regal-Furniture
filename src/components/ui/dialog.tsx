@@ -130,7 +130,7 @@ function DialogTitle({
     <DialogPrimitive.Title
       data-slot="dialog-title"
       className={cn(
-        "font-heading text-[1.375rem] leading-tight font-semibold text-ink",
+        "font-heading text-[1.25rem] leading-tight font-semibold tracking-tight text-ink",
         className
       )}
       {...props}

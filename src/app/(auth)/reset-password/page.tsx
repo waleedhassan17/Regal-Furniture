@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Choose a new password" }
 export default function ResetPasswordPage() {
   return (
     <div>
-      <h1 className="font-heading text-[2rem] leading-tight font-bold text-ink sm:text-h1">Choose a new password</h1>
+      <h1 className="font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">Choose a new password</h1>
       <p className="mt-2 mb-8 text-sm text-stone">You&apos;ll use it the next time you sign in.</p>
       <Suspense fallback={<Skeleton className="h-56" />}>
         <ResetGate />

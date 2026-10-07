@@ -10,6 +10,7 @@ const emailField = z
 export const signInSchema = z.object({
   email: emailField,
   password: z.string().min(1, "Enter your password."),
+  role: z.enum(["admin", "staff"], { message: "Choose how you're signing in." }),
   next: z.string().optional(),
 })
 export type SignInInput = z.input<typeof signInSchema>

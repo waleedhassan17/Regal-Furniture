@@ -18,7 +18,7 @@ Internal order-tracking portal for Regal Furnitures (Pakistani furniture maker).
 - `npm run db:check-dashboard` — recomputes dashboard numbers with independent SQL and compares
 
 ## Folder conventions
-- `src/app/(auth)` login + password flows; `src/app/(app)` the signed-in portal; route files stay thin.
+- `src/app/page.tsx` public landing page; `src/app/(auth)` role choice, login + password flows; `src/app/(app)` the signed-in portal; route files stay thin.
 - `src/features/<feature>/` — `components/`, `actions.ts` (server actions), `queries.ts` (server reads), `schema.ts` (Zod, shared client/server).
 - `src/components/ui` shadcn primitives (restyled); `src/components/{shell,brand,data}` shared app pieces.
 - `src/lib/supabase/{server,browser,proxy,admin}.ts`; `admin.ts` is service-role and `server-only`.
@@ -31,5 +31,5 @@ Internal order-tracking portal for Regal Furnitures (Pakistani furniture maker).
 - **Attention logic** lives only in SQL (`compute_attention`, used by the `order_overview` view). Do not re-implement it in TypeScript.
 - **Migrations:** never edit an applied migration; add a new numbered file, run `db:migrate`, then `db:types`.
 - **Quality bar (SPEC §8):** no `any`; features in their own folders; friendly UI errors, details only in server logs. `lint`, `typecheck`, `test`, `build` must all pass before a phase is done. Commit locally at the end of each phase; never push.
-- **Design (SPEC §7):** tokens in `src/app/globals.css` only — Bone leads, Ink anchors, Regal Red is scarce (primary actions, key figures, urgent states). Playfair Display for titles/big numbers, Montserrat elsewhere, tabular figures for money/counts. 44px tap targets, works at 360px, WCAG AA, visible focus.
+- **Design (SPEC §7):** tokens in `src/app/globals.css` only — Bone leads, Ink anchors, Regal Red is scarce (primary actions, key figures, urgent states). Inter everywhere (semibold + tight tracking for headings), tabular figures for money/counts. 44px tap targets, works at 360px, WCAG AA, visible focus.
 - **Formats:** `Rs 125,000` (no decimals), `08 Oct 2026`, "5 days left" / "Due today" / "3 days overdue"; dates are `Asia/Karachi`.

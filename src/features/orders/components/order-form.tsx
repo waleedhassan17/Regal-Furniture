@@ -443,7 +443,7 @@ function SectionHeading({ id, number, title, description }: { id: string; number
   return (
     <div>
       <p className="eyebrow text-regal">{number}</p>
-      <h2 id={id} className="mt-1 font-heading text-[1.375rem] leading-tight font-bold text-ink">
+      <h2 id={id} className="mt-1 font-heading text-[1.25rem] leading-tight font-semibold tracking-tight text-ink">
         {title}
       </h2>
       {description && <p className="mt-1 text-sm text-stone">{description}</p>}

@@ -20,7 +20,7 @@ The portal has one job: every order lives in one place and nobody has to remembe
 
 **What good looks like.** A new person can enter an order without training. Nobody needs to scroll or search to find out what is late. The app looks and feels like a finished product from an established brand, not an admin template.
 
-**Out of scope.** No public website, customer login, online payments, inventory, invoicing or accounting.
+**Out of scope.** No public marketing website (the portal has its own simple landing page), customer login, online payments, inventory, invoicing or accounting.
 
 ## 2. Technology
 
@@ -107,7 +107,9 @@ Requirements:
 
 ## 6. Screens
 
-**Login.** Branded, split layout on desktop with the full logo lockup; clear error messages; forgot-password flow.
+**Landing page.** The public home page (`/`): what the portal is, a short list of what it does, and the first step of signing in — choosing a role. Signed-in visitors go straight to the dashboard. *(Added 2026-10-08 at the owner's request.)*
+
+**Login.** Branded, split layout on desktop with the full logo lockup; clear error messages; forgot-password flow. Signing in starts by choosing a role — **Office & admin** or **Factory staff** — and the server checks that the account really has that role (a mismatch is refused with a one-tap "Continue as …" option). *(Role selection added 2026-10-08 at the owner's request; roles are still assigned only by admins.)*
 
 **Dashboard.** Count cards for Overdue, Due soon, Needs to start, In production, Ready for delivery, and Delivered this month, each linking to the filtered list. Below, a "Needs attention" list ordered by urgency showing client, item summary, days left, status and person responsible. Admins also see total outstanding balance on open orders. If nothing needs attention, say so plainly.
 
@@ -131,7 +133,7 @@ Requirements:
 Read all eight pages of the brand PDF before designing anything. The interface should feel like the brand: warm, calm, confident, well-made.
 
 - **Colour.** Bone `#F5F1EA` is the page background. Ink `#231F20` is text and the sidebar. Regal Red `#C42126` is for primary actions, key figures and urgent states; Crimson Depth `#8E1620` for hover and pressed. Sand `#E8E0D2` for borders and subtle fills, with white or near-white card surfaces on Bone. Walnut `#5A3A24` as a warm accent. Charcoal `#2A2A2D` for secondary dark surfaces. The guideline is "Bone leads, Ink anchors, Crimson is the moment of conviction": keep red scarce so that it means something, and never put body text on a red background.
-- **Type.** Playfair Display for page titles and large dashboard numbers; Montserrat for everything else; both via `next/font`. One line on the PDF's last page mentions "Inter Sans"; ignore it, the typography page and the PDF's embedded fonts are Montserrat. Use tabular figures for money and counts.
+- **Type.** Inter for everything — titles, figures and body — via `next/font`, with semibold weights and slightly tightened tracking for headings. Use tabular figures for money and counts. *(Changed 2026-10-08 at the owner's request for a more professional face; the brand book's governance page pairs the identity with Inter Sans. Previously Playfair Display + Montserrat.)*
 - **Logo.** Use the files in `brand/` exactly as supplied: full lockup on the login page, mark only in the collapsed sidebar and as the favicon. Do not redraw, recolour or stretch it. If the logo files are missing, use a plain text wordmark and tell me.
 - **Hexagon motif.** The brand frames icons in hexagons. Use this for the dashboard count cards and empty states, sparingly.
 - **Status colour.** Brand red for Overdue, a warm amber for Due soon, walnut or sand tones for Needs to start, a muted green for Delivered, neutral for On track. Tune these so they sit comfortably with the brand palette, and always pair colour with a text label.
@@ -157,3 +159,5 @@ Read all eight pages of the brand PDF before designing anything. The interface s
 - The reminder defaults of 3, 10 and 2 days. Confirmed.
 - Two roles only: owner and office staff are `admin`; factory staff are `staff`.
 - Order notes are an append-only log with author and time (`order_notes`), replacing a single internal-notes field. Special instructions remain a single field on the order and print on the job sheet.
+- Typeface: Inter throughout (owner's request, 2026-10-08).
+- A public landing page and a choose-your-role step before signing in (owner's request, 2026-10-08).

@@ -24,7 +24,7 @@ export function EmptyState({ icon: Icon, title, description, action, tone = "neu
       >
         <Icon aria-hidden="true" className="size-6" style={{ color: positive ? "var(--st-done-fg)" : "var(--stone)" }} />
       </HexFrame>
-      <h3 className="mt-5 font-heading text-[1.5rem] leading-tight font-semibold text-ink">{title}</h3>
+      <h3 className="mt-5 font-heading text-[1.375rem] leading-tight font-semibold tracking-tight text-ink">{title}</h3>
       {description && <p className="mt-2 max-w-sm text-sm leading-relaxed text-stone">{description}</p>}
       {action && <div className="mt-6 flex flex-wrap justify-center gap-3">{action}</div>}
     </div>

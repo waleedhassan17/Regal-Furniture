@@ -2,6 +2,7 @@
 
 An internal web app where every Regal order lives in one place. Office staff enter orders with their items, photos and amounts. Factory staff update progress from their phones. The dashboard shows straight away what is overdue, what is due soon and what hasn't been started.
 
+- **Landing page and sign-in:** a branded home page, then a choice of *Office & admin* or *Factory staff* before signing in. The server checks the chosen role against the account.
 - **Dashboard:** counts for overdue, due soon, needs to start, in production, ready and delivered this month. Below them is a "Needs attention" list, most urgent first. Admins also see the outstanding balance.
 - **Orders:**
   - search by client, phone, order or bill number
@@ -70,7 +71,7 @@ Requirements: Node.js 22.9 or newer, npm, and a Supabase project.
    npm run dev
    ```
 
-   Open http://localhost:3000 and sign in with `SEED_ADMIN_EMAIL`.
+   Open http://localhost:3000, choose **Office & admin**, and sign in with `SEED_ADMIN_EMAIL`.
 
 ## Scripts
 
@@ -109,7 +110,8 @@ Requirements: Node.js 22.9 or newer, npm, and a Supabase project.
 ## Project structure
 
 ```
-src/app/(auth)        login, forgot and reset password
+src/app/page.tsx      public landing page
+src/app/(auth)        role choice, login, forgot and reset password
 src/app/(app)         the signed-in portal (dashboard, orders, clients, team, settings)
 src/app/(print)       print views (A4 job sheet)
 src/features/<name>/  components/, actions.ts (server actions), queries.ts (server reads), schema.ts (Zod)

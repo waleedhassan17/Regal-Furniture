@@ -71,7 +71,7 @@ export function PaymentsPanel({ orderId, orderAmount, deliveryCharges, payments,
         <div className="flex items-end justify-between gap-3 rounded-lg border border-sand bg-sand-soft/60 px-4 py-3">
           <div>
             <p className="text-caption font-semibold text-stone">{money.overpaid > 0 ? "Overpaid by" : "Remaining"}</p>
-            <p className={cn("font-display text-[1.875rem] leading-tight font-bold tabular", remainingTone)}>
+            <p className={cn("font-display text-[1.75rem] leading-tight font-semibold tracking-tight tabular", remainingTone)}>
               {money.remaining === null ? "Amount not set" : money.overpaid > 0 ? formatMoney(money.overpaid) : formatMoney(money.remaining)}
             </p>
           </div>

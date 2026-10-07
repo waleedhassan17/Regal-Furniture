@@ -63,7 +63,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
             <p className="mt-3 text-[9pt] font-bold tracking-[0.18em] text-regal uppercase">Factory job sheet</p>
           </div>
           <div className="text-right">
-            <p className="font-display text-[22pt] leading-none font-bold tabular">{order.order_number}</p>
+            <p className="font-display text-[20pt] leading-none font-semibold tracking-tight tabular">{order.order_number}</p>
             {order.bill_number && <p className="mt-1 text-[9pt] text-stone">Bill {order.bill_number}</p>}
           </div>
         </header>

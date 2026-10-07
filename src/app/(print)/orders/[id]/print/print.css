@@ -4,7 +4,7 @@
   margin: 12mm 12mm 14mm;
   @bottom-right {
     content: "Page " counter(page) " of " counter(pages);
-    font: 8pt var(--font-montserrat), sans-serif;
+    font: 8pt var(--font-inter), sans-serif;
     color: #6b6259;
   }
 }

@@ -15,7 +15,7 @@ type HexStatCardProps = {
   urgent?: boolean
 }
 
-/** Dashboard count card: hexagon-framed icon, a large Playfair figure, and a link to the filtered list. */
+/** Dashboard count card: hexagon-framed icon, a large figure, and a link to the filtered list. */
 export function HexStatCard({ label, value, href, icon: Icon, tone = "track", hint, urgent = false }: HexStatCardProps) {
   const isZero = value === 0
   const accent = `var(--st-${tone}-dot)`
@@ -40,7 +40,7 @@ export function HexStatCard({ label, value, href, icon: Icon, tone = "track", hi
       </div>
       <div className="mt-4">
         <p
-          className={cn("font-display text-[2.5rem] leading-none font-bold tabular sm:text-[2.75rem]", isZero ? "text-stone/70" : "text-ink")}
+          className={cn("font-display text-[2.25rem] leading-none font-semibold tracking-tight tabular sm:text-[2.5rem]", isZero ? "text-stone/70" : "text-ink")}
           style={!isZero && urgent ? { color: `var(--st-${tone}-fg)` } : undefined}
         >
           {value}

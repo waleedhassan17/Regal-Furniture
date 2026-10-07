@@ -46,11 +46,20 @@ export async function updateSession(request: NextRequest) {
     return redirectWithCookies(url, response)
   }
 
+  // The landing page is public; signed-in people go straight to their dashboard.
+  if (pathname === "/") {
+    if (!signedIn) return response
+    const url = request.nextUrl.clone()
+    url.pathname = "/dashboard"
+    url.search = ""
+    return redirectWithCookies(url, response)
+  }
+
   if (!signedIn && !isPublic(pathname)) {
     const url = request.nextUrl.clone()
     url.pathname = "/login"
     url.search = ""
-    if (pathname !== "/" && pathname !== "/dashboard") url.searchParams.set("next", pathname + search)
+    if (pathname !== "/dashboard") url.searchParams.set("next", pathname + search)
     return redirectWithCookies(url, response)
   }
 
