@@ -40,7 +40,7 @@ export function Pagination({ page, pageSize, total, hrefFor, noun = ["result", "
 }
 
 function PageLink({ href, label, children }: { href: string | null; label: string; children: React.ReactNode }) {
-  const classes = "inline-flex h-11 items-center gap-1 rounded-md border border-sand-strong bg-paper px-4 text-sm font-semibold"
+  const classes = "inline-flex h-11 items-center gap-1 rounded-md border border-line-strong bg-paper px-4 text-sm font-semibold"
   if (!href) {
     return (
       <span aria-disabled="true" className={cn(classes, "pointer-events-none opacity-40")}>
@@ -49,7 +49,7 @@ function PageLink({ href, label, children }: { href: string | null; label: strin
     )
   }
   return (
-    <Link href={href} aria-label={label} className={cn(classes, "text-ink hover:bg-sand-soft")}>
+    <Link href={href} aria-label={label} className={cn(classes, "text-ink hover:bg-subtle")}>
       {children}
     </Link>
   )

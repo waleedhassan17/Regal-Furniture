@@ -19,7 +19,6 @@ export default function ClientsPage(props: PageProps<"/clients">) {
   return (
     <>
       <PageHeader
-        eyebrow="Clients"
         title="Clients"
         description="Homes, schools and offices we make furniture for."
         actions={
@@ -68,9 +67,9 @@ async function ClientsContent({ searchParams }: { searchParams: PageProps<"/clie
               <li key={c.id}>
                 <Link
                   href={`/clients/${c.id}`}
-                  className="group flex h-full items-center gap-4 rounded-xl border border-sand bg-card p-4 shadow-(--shadow-card) transition-[border-color,box-shadow] hover:border-sand-strong hover:shadow-(--shadow-raised)"
+                  className="group flex h-full items-center gap-4 rounded-xl border border-line bg-card p-4 shadow-(--shadow-card) transition-[border-color,box-shadow] hover:border-line-strong"
                 >
-                  <span aria-hidden="true" className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-sand-soft font-heading text-[1rem] font-semibold text-walnut">
+                  <span aria-hidden="true" className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-subtle font-heading text-[1rem] font-semibold text-walnut">
                     {c.name.trim().charAt(0).toUpperCase()}
                   </span>
                   <span className="min-w-0 flex-1">

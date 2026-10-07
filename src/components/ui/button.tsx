@@ -12,11 +12,11 @@ const buttonVariants = cva(
           "bg-primary text-primary-foreground hover:bg-crimson active:bg-crimson",
         ink: "bg-ink text-bone hover:bg-charcoal",
         outline:
-          "border-sand-strong bg-paper text-foreground hover:border-stone/40 hover:bg-sand-soft aria-expanded:bg-sand-soft",
+          "border-line-strong bg-paper text-foreground hover:border-stone/40 hover:bg-subtle aria-expanded:bg-subtle",
         secondary:
-          "bg-sand-soft text-foreground hover:bg-sand aria-expanded:bg-sand",
+          "bg-subtle text-foreground hover:bg-line aria-expanded:bg-line",
         ghost:
-          "text-foreground hover:bg-sand-soft aria-expanded:bg-sand-soft",
+          "text-foreground hover:bg-subtle aria-expanded:bg-subtle",
         destructive:
           "border-regal/30 bg-paper text-regal hover:border-regal hover:bg-[var(--st-overdue-bg)]",
         link: "h-auto! px-0! text-regal underline-offset-4 hover:text-crimson hover:underline",

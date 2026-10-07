@@ -4,12 +4,10 @@ import { useState, useTransition } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
-import { CalendarClock, Hourglass, TimerReset } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { FormAlert } from "@/components/ui/field"
 import { Spinner } from "@/components/ui/spinner"
-import { HexFrame } from "@/components/brand/hexagon"
 import { updateSettingsAction } from "@/features/settings/actions"
 import { settingsSchema, type SettingsFormValues, type SettingsValues } from "@/features/settings/schema"
 
@@ -50,8 +48,6 @@ export function SettingsForm({ initial }: { initial: { dueSoonDays: number; star
 
       <Setting
         id="due_soon_days"
-        icon={CalendarClock}
-        tone="due"
         title="Due soon"
         unit="days before the deadline"
         error={errors.due_soon_days?.message}
@@ -63,8 +59,6 @@ export function SettingsForm({ initial }: { initial: { dueSoonDays: number; star
 
       <Setting
         id="start_warning_days"
-        icon={Hourglass}
-        tone="start"
         title="Start warning"
         unit="days before the deadline"
         error={errors.start_warning_days?.message}
@@ -75,8 +69,6 @@ export function SettingsForm({ initial }: { initial: { dueSoonDays: number; star
 
       <Setting
         id="not_started_grace_days"
-        icon={TimerReset}
-        tone="start"
         title="Not-started grace period"
         unit="days after the order"
         error={errors.not_started_grace_days?.message}
@@ -102,8 +94,6 @@ export function SettingsForm({ initial }: { initial: { dueSoonDays: number; star
 
 function Setting({
   id,
-  icon: Icon,
-  tone,
   title,
   unit,
   error,
@@ -111,8 +101,6 @@ function Setting({
   children,
 }: {
   id: string
-  icon: typeof Hourglass
-  tone: "due" | "start"
   title: string
   unit: string
   error?: string
@@ -120,12 +108,9 @@ function Setting({
   children: React.ReactNode
 }) {
   return (
-    <section aria-labelledby={`${id}-title`} className="flex flex-col gap-4 rounded-xl border border-sand bg-card p-5 shadow-(--shadow-card) sm:flex-row sm:items-start sm:gap-5 sm:p-6">
-      <HexFrame size={48} stroke={`var(--st-${tone}-dot)`} fill={`var(--st-${tone}-bg)`}>
-        <Icon aria-hidden="true" className="size-5" style={{ color: `var(--st-${tone}-fg)` }} />
-      </HexFrame>
+    <section aria-labelledby={`${id}-title`} className="flex flex-col gap-4 rounded-xl border border-line bg-card p-5 sm:flex-row sm:items-start sm:gap-5 sm:p-6">
       <div className="flex-1">
-        <h2 id={`${id}-title`} className="text-h3 font-bold text-ink">
+        <h2 id={`${id}-title`} className="text-[1.0625rem] font-semibold tracking-tight text-ink">
           <label htmlFor={id}>{title}</label>
         </h2>
         <p className="mt-1 text-sm leading-relaxed text-stone [&_strong]:font-semibold [&_strong]:text-ink">{children}</p>

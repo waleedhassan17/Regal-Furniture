@@ -15,7 +15,7 @@ export const metadata: Metadata = { title: "New order" }
 export default function NewOrderPage(props: PageProps<"/orders/new">) {
   return (
     <>
-      <PageHeader eyebrow="Orders" title="New order" description="Add the client, the deadline and each item. Only the item name and quantity are required." />
+      <PageHeader title="New order" description="Add the client, the deadline and each item. Only the item name and quantity are required." />
       <Suspense fallback={<OrderFormSkeleton />}>
         <NewOrder searchParams={props.searchParams} />
       </Suspense>

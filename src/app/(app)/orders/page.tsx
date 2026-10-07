@@ -22,7 +22,6 @@ export default function OrdersPage(props: PageProps<"/orders">) {
   return (
     <>
       <PageHeader
-        eyebrow="Orders"
         title="Orders"
         description="Every order in one place, nearest deadline first."
         actions={

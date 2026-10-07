@@ -20,7 +20,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 export default function EditOrderPage(props: PageProps<"/orders/[id]/edit">) {
   return (
-    <Suspense fallback={<><PageHeader eyebrow="Orders" title="Edit order" /><OrderFormSkeleton /></>}>
+    <Suspense fallback={<><PageHeader title="Edit order" /><OrderFormSkeleton /></>}>
       <EditOrder params={props.params} />
     </Suspense>
   )
@@ -47,8 +47,7 @@ async function EditOrder({ params }: { params: PageProps<"/orders/[id]/edit">["p
   return (
     <>
       <PageHeader
-        eyebrow={`Orders · ${order.order_number}`}
-        title="Edit order"
+        title={`Edit ${order.order_number}`}
         description={order.client ? `For ${order.client.name}` : undefined}
         back={
           <Link href={`/orders/${order.id}`} className="inline-flex h-9 items-center gap-1.5 text-sm font-semibold text-stone hover:text-ink">

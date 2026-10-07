@@ -66,7 +66,7 @@ async function OrderContent({ params }: { params: PageProps<"/orders/[id]">["par
   return (
     <div className="flex flex-col gap-6">
       {order.is_archived && (
-        <div role="status" className="flex items-center gap-3 rounded-lg border border-sand-strong bg-sand-soft px-4 py-3 text-sm text-ink">
+        <div role="status" className="flex items-center gap-3 rounded-lg border border-line-strong bg-subtle px-4 py-3 text-sm text-ink">
           <Archive aria-hidden="true" className="size-4 shrink-0 text-stone" />
           This order is archived. It&apos;s hidden from lists and reminders{user.isAdmin ? " — restore it from the menu to make changes." : "."}
         </div>
@@ -74,11 +74,11 @@ async function OrderContent({ params }: { params: PageProps<"/orders/[id]">["par
 
       <header className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
         <div className="min-w-0">
-          <p className="eyebrow text-regal">
-            Order {order.order_number}
+          <p className="text-sm font-medium text-stone tabular">
+            {order.order_number}
             {order.bill_number ? ` · Bill ${order.bill_number}` : ""}
           </p>
-          <h1 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">{order.client_name}</h1>
+          <h1 className="mt-1 font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">{order.client_name}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <StatusControl orderId={order.id} orderNumber={order.order_number} status={order.status} disabled={order.is_archived} />
             <DaysLeftBadge daysLeft={order.days_left} attention={order.attention_level} status={order.status} isArchived={order.is_archived} className="h-9" />
@@ -122,7 +122,7 @@ async function OrderContent({ params }: { params: PageProps<"/orders/[id]">["par
               </Fact>
               {order.special_instructions && (
                 <Fact icon={ScrollText} label="Special instructions" className="sm:col-span-2">
-                  <span className="block rounded-md border-l-[3px] border-walnut bg-[var(--st-start-bg)] px-3 py-2 whitespace-pre-line text-ink">
+                  <span className="block rounded-md bg-subtle px-3 py-2 whitespace-pre-line text-ink">
                     {order.special_instructions}
                   </span>
                 </Fact>

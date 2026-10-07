@@ -104,7 +104,7 @@ export function ItemPhoto({ orderId, itemId, itemLabel, path, savedUrl, isSavedP
 
   if (busy) {
     return (
-      <div className="flex min-h-24 flex-col justify-center gap-3 rounded-lg border border-dashed border-sand-strong bg-sand-soft/50 p-4" aria-live="polite">
+      <div className="flex min-h-24 flex-col justify-center gap-3 rounded-lg border border-dashed border-line-strong bg-subtle/50 p-4" aria-live="polite">
         <div className="flex items-center gap-2 text-sm font-semibold text-ink">
           <Spinner />
           {state.kind === "compressing" ? "Preparing photo…" : `Uploading… ${Math.round(state.progress * 100)}%`}
@@ -119,8 +119,8 @@ export function ItemPhoto({ orderId, itemId, itemLabel, path, savedUrl, isSavedP
 
   if (preview) {
     return (
-      <div className="flex items-center gap-4 rounded-lg border border-sand bg-paper p-3">
-        <div className="relative size-20 shrink-0 overflow-hidden rounded-md bg-sand-soft">
+      <div className="flex items-center gap-4 rounded-lg border border-line bg-paper p-3">
+        <div className="relative size-20 shrink-0 overflow-hidden rounded-md bg-subtle">
           <Image src={preview} alt={`Reference photo for ${itemLabel}`} fill unoptimized sizes="80px" className="object-cover" />
         </div>
         <div className="flex flex-1 flex-wrap gap-2">

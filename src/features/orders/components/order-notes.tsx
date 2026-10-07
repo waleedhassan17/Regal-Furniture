@@ -67,9 +67,9 @@ export function OrderNotes({ orderId, notes, canDelete }: { orderId: string; not
         {notes.length === 0 ? (
           <p className="text-sm text-stone">No notes yet.</p>
         ) : (
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col divide-y divide-line">
             {notes.map((note) => (
-              <li key={note.id} className="group border-l-2 border-sand-strong pl-3">
+              <li key={note.id} className="group py-3 first:pt-0 last:pb-0">
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-caption text-stone">
                     <span className="font-bold text-ink">{note.author_name}</span> · {formatDateTime(note.created_at)}

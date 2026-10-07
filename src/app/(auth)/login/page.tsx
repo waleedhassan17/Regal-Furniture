@@ -35,7 +35,6 @@ async function Login({ searchParams }: { searchParams: PageProps<"/login">["sear
   // Step one: choose how you're signing in.
   return (
     <div>
-      <p className="eyebrow mb-3 text-regal">Welcome back</p>
       <h1 className="font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">Sign in to Regal Orders</h1>
       <p className="mt-2 mb-8 text-sm text-stone">First, choose how you&apos;re signing in.</p>
       {notice && (

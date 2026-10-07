@@ -54,8 +54,7 @@ async function ClientContent({ params }: { params: PageProps<"/clients/[id]">["p
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="min-w-0">
-          <p className="eyebrow text-regal">Client</p>
-          <h1 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">{client.name}</h1>
+          <h1 className="font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">{client.name}</h1>
           <p className="mt-2 text-sm text-stone">
             {orders.length} {orders.length === 1 ? "order" : "orders"} · {openCount} open
           </p>
@@ -130,7 +129,7 @@ async function ClientContent({ params }: { params: PageProps<"/clients/[id]">["p
                     {formatMoney(balances.outstanding)}
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-t border-sand pt-3">
+                <div className="grid grid-cols-2 gap-3 border-t border-line pt-3">
                   <div>
                     <p className="text-caption font-semibold text-stone">Total billed</p>
                     <p className="font-semibold text-ink">{formatMoney(balances.billed)}</p>
@@ -175,7 +174,7 @@ async function ClientContent({ params }: { params: PageProps<"/clients/[id]">["p
                     <Link
                       href={`/orders/${o.id}`}
                       className={cn(
-                        "flex flex-col gap-3 rounded-xl border border-sand bg-card p-4 shadow-(--shadow-card) transition-[border-color,box-shadow] hover:border-sand-strong hover:shadow-(--shadow-raised) sm:flex-row sm:items-center",
+                        "flex flex-col gap-3 rounded-xl border border-line bg-card p-4 shadow-(--shadow-card) transition-[border-color,box-shadow] hover:border-line-strong sm:flex-row sm:items-center",
                         o.is_archived && "opacity-70"
                       )}
                     >

@@ -68,7 +68,7 @@ export function PaymentsPanel({ orderId, orderAmount, deliveryCharges, payments,
           <Stat label="Grand total" value={money.grandTotal === null ? "—" : formatMoney(money.grandTotal)} strong />
           <Stat label="Received" value={formatMoney(money.received)} strong />
         </dl>
-        <div className="flex items-end justify-between gap-3 rounded-lg border border-sand bg-sand-soft/60 px-4 py-3">
+        <div className="flex items-end justify-between gap-3 rounded-lg border border-line bg-subtle/60 px-4 py-3">
           <div>
             <p className="text-caption font-semibold text-stone">{money.overpaid > 0 ? "Overpaid by" : "Remaining"}</p>
             <p className={cn("font-display text-[1.75rem] leading-tight font-semibold tracking-tight tabular", remainingTone)}>
@@ -90,11 +90,11 @@ export function PaymentsPanel({ orderId, orderAmount, deliveryCharges, payments,
         )}
 
         {payments.length === 0 ? (
-          <div className="flex items-center gap-3 rounded-lg border border-dashed border-sand-strong px-4 py-4 text-sm text-stone">
+          <div className="flex items-center gap-3 rounded-lg border border-dashed border-line-strong px-4 py-4 text-sm text-stone">
             <Banknote aria-hidden="true" className="size-5 shrink-0" /> No payments recorded yet.
           </div>
         ) : (
-          <ul className="flex flex-col divide-y divide-sand rounded-lg border border-sand">
+          <ul className="flex flex-col divide-y divide-line rounded-lg border border-line">
             {payments.map((p) => (
               <li key={p.id} className="flex items-center gap-3 px-4 py-3">
                 <div className="min-w-0 flex-1">

@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Team" }
 export default function TeamPage() {
   return (
     <>
-      <PageHeader eyebrow="Team" title="Team" description="Everyone who can sign in to the portal. Add people, change their role, or remove their access." />
+      <PageHeader title="Team" description="Everyone who can sign in to the portal. Add people, change their role, or remove their access." />
       <Suspense fallback={<div className="flex flex-col gap-3">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-20" />)}</div>}>
         <Team />
       </Suspense>

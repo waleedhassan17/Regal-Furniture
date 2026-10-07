@@ -107,7 +107,7 @@ Requirements:
 
 ## 6. Screens
 
-**Landing page.** The public home page (`/`): what the portal is, a short list of what it does, and the first step of signing in — choosing a role. Signed-in visitors go straight to the dashboard. *(Added 2026-10-08 at the owner's request.)*
+**Landing page.** The public home page (`/`), built on the brand book: the cover split (tagline and sign-in on white, Regal Red panel with the wordmark), the four brand pillars, the mission band and contact details — and the first step of signing in, choosing a role. Signed-in visitors go straight to the dashboard. *(Added 2026-10-08 at the owner's request.)*
 
 **Login.** Branded, split layout on desktop with the full logo lockup; clear error messages; forgot-password flow. Signing in starts by choosing a role — **Office & admin** or **Factory staff** — and the server checks that the account really has that role (a mismatch is refused with a one-tap "Continue as …" option). *(Role selection added 2026-10-08 at the owner's request; roles are still assigned only by admins.)*
 
@@ -132,10 +132,11 @@ Requirements:
 
 Read all eight pages of the brand PDF before designing anything. The interface should feel like the brand: warm, calm, confident, well-made.
 
-- **Colour.** Bone `#F5F1EA` is the page background. Ink `#231F20` is text and the sidebar. Regal Red `#C42126` is for primary actions, key figures and urgent states; Crimson Depth `#8E1620` for hover and pressed. Sand `#E8E0D2` for borders and subtle fills, with white or near-white card surfaces on Bone. Walnut `#5A3A24` as a warm accent. Charcoal `#2A2A2D` for secondary dark surfaces. The guideline is "Bone leads, Ink anchors, Crimson is the moment of conviction": keep red scarce so that it means something, and never put body text on a red background.
+- **Surfaces (owner's request, 2026-10-08).** Pages are off-white (`#FAFAF9`) with white cards and neutral grey lines; the warm Bone and Sand are kept for brand moments. Decoration is restrained: no coloured accent bars on cards, lists or navigation, no small coloured labels above titles, no hover lifts; the hexagon appears only on the red brand panels (landing and sign-in).
+- **Colour.** Bone `#F5F1EA` was the original page background (see Surfaces above). Ink `#231F20` is text and the sidebar. Regal Red `#C42126` is for primary actions, key figures and urgent states; Crimson Depth `#8E1620` for hover and pressed. Sand `#E8E0D2` for borders and subtle fills, with white or near-white card surfaces on Bone. Walnut `#5A3A24` as a warm accent. Charcoal `#2A2A2D` for secondary dark surfaces. The guideline is "Bone leads, Ink anchors, Crimson is the moment of conviction": keep red scarce so that it means something, and never put body text on a red background.
 - **Type.** Inter for everything — titles, figures and body — via `next/font`, with semibold weights and slightly tightened tracking for headings. Use tabular figures for money and counts. *(Changed 2026-10-08 at the owner's request for a more professional face; the brand book's governance page pairs the identity with Inter Sans. Previously Playfair Display + Montserrat.)*
 - **Logo.** Use the files in `brand/` exactly as supplied: full lockup on the login page, mark only in the collapsed sidebar and as the favicon. Do not redraw, recolour or stretch it. If the logo files are missing, use a plain text wordmark and tell me.
-- **Hexagon motif.** The brand frames icons in hexagons. Use this for the dashboard count cards and empty states, sparingly.
+- **Hexagon motif.** Only as a large faint outline on the Regal Red brand panels (landing and sign-in). *(Changed 2026-10-08: no hexagon icon frames inside the app.)*
 - **Status colour.** Brand red for Overdue, a warm amber for Due soon, walnut or sand tones for Needs to start, a muted green for Delivered, neutral for On track. Tune these so they sit comfortably with the brand palette, and always pair colour with a text label.
 - **Craft.** Define the palette, type scale, radii and spacing once as design tokens and build every component from them. Soft borders over heavy shadows. Generous spacing. Tap targets at least 44px. Skeleton loading states, helpful empty states, clear error states, toast confirmations for actions. Subtle, quick transitions only.
 - **Responsive.** Fully usable at 360px width. Sidebar on desktop, bottom navigation or drawer on mobile.
@@ -161,3 +162,4 @@ Read all eight pages of the brand PDF before designing anything. The interface s
 - Order notes are an append-only log with author and time (`order_notes`), replacing a single internal-notes field. Special instructions remain a single field on the order and print on the job sheet.
 - Typeface: Inter throughout (owner's request, 2026-10-08).
 - A public landing page and a choose-your-role step before signing in (owner's request, 2026-10-08).
+- Off-white/white surfaces and restrained decoration — no accent bars, labels above titles or hexagon icon frames (owner's request, 2026-10-08).

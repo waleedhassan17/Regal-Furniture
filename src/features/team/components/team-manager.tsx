@@ -65,12 +65,12 @@ export function TeamManager({ members, currentUserId }: { members: TeamMember[];
         </Button>
       </div>
 
-      <ul className="flex flex-col divide-y divide-sand overflow-hidden rounded-xl border border-sand bg-card shadow-(--shadow-card)">
+      <ul className="flex flex-col divide-y divide-line overflow-hidden rounded-xl border border-line bg-card shadow-(--shadow-card)">
         {members.map((m) => {
           const isMe = m.id === currentUserId
           const lastAdmin = m.role === "admin" && m.is_active && activeAdmins === 1
           return (
-            <li key={m.id} className={cn("flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:px-5", !m.is_active && "bg-sand-soft/40")}>
+            <li key={m.id} className={cn("flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:px-5", !m.is_active && "bg-subtle/40")}>
               <div className="flex min-w-0 flex-1 items-center gap-3">
                 <Initials name={m.full_name} className={cn(!m.is_active && "bg-stone/40")} />
                 <div className="min-w-0">
@@ -321,7 +321,7 @@ function CredentialCard({ email, password }: { email: string; password: string }
   const text = `Regal Orders sign-in\nEmail: ${email}\nTemporary password: ${password}\n${window.location.origin}/login`
   return (
     <div className="flex flex-col gap-4">
-      <dl className="grid gap-3 rounded-lg border border-sand bg-sand-soft/60 p-4 text-sm">
+      <dl className="grid gap-3 rounded-lg border border-line bg-subtle/60 p-4 text-sm">
         <div>
           <dt className="text-caption font-semibold text-stone">Email</dt>
           <dd className="font-semibold break-all text-ink">{email}</dd>

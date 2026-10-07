@@ -67,11 +67,10 @@ export function LoginForm({ role: initialRole, next, notice }: LoginFormProps) {
 
   return (
     <div>
-      <p className="eyebrow mb-3 text-regal">{ROLE_TITLE[role]}</p>
       <h1 className="font-heading text-[1.75rem] leading-tight font-semibold tracking-tight text-ink sm:text-h1">Sign in</h1>
       <p className="mt-2 text-sm text-stone">{SUBTITLE[role]}</p>
       <p className="mt-4 mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-sand-strong bg-paper px-3 py-1 font-medium text-ink">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-paper px-3 py-1 font-medium text-ink">
           Signing in as {ROLE_TITLE[role]}
         </span>
         <Link href={loginHref(null, next)} className="font-semibold text-stone underline-offset-4 hover:text-ink hover:underline">

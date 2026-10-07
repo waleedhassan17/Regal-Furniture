@@ -1,37 +1,14 @@
-import { cn } from "@/lib/utils"
-
 /** Pointy-top hexagon with softened corners, echoing the Regal mark. */
 const HEX_PATH = "M50 4 L90 27 L90 73 L50 96 L10 73 L10 27 Z"
 
-type HexFrameProps = {
-  children?: React.ReactNode
-  size?: number
-  /** Outline colour; any CSS colour or var(). */
-  stroke?: string
-  /** Fill colour inside the frame. */
-  fill?: string
-  strokeWidth?: number
-  className?: string
-}
-
-/** Hexagonal frame for icons — the brand's motif for categories, stats and empty states. */
-export function HexFrame({
-  children,
-  size = 48,
-  stroke = "var(--sand-strong)",
-  fill = "transparent",
-  strokeWidth = 5,
-  className,
-}: HexFrameProps) {
+/**
+ * Large decorative outline of the hexagon from the Regal mark, for brand panels only
+ * (landing and sign-in). Colour comes from `currentColor`.
+ */
+export function HexOutline({ className, strokeWidth = 3 }: { className?: string; strokeWidth?: number }) {
   return (
-    <span
-      className={cn("relative inline-flex shrink-0 items-center justify-center", className)}
-      style={{ width: size, height: size }}
-    >
-      <svg viewBox="0 0 100 100" className="absolute inset-0 size-full" aria-hidden="true">
-        <path d={HEX_PATH} fill={fill} stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" />
-      </svg>
-      <span className="relative inline-flex items-center justify-center">{children}</span>
-    </span>
+    <svg aria-hidden="true" viewBox="0 0 100 100" fill="none" className={className}>
+      <path d={HEX_PATH} stroke="currentColor" strokeWidth={strokeWidth} strokeLinejoin="round" />
+    </svg>
   )
 }

@@ -19,7 +19,7 @@ type OrderListProps = {
 export function OrderList({ rows, isAdmin, balances }: OrderListProps) {
   return (
     <>
-      <div className="hidden overflow-hidden rounded-xl border border-sand bg-card shadow-(--shadow-card) lg:block">
+      <div className="hidden overflow-hidden rounded-xl border border-line bg-card shadow-(--shadow-card) lg:block">
         <Table className="table-fixed">
           <colgroup>
             <col className="w-[24%]" />
@@ -105,7 +105,7 @@ export function OrderList({ rows, isAdmin, balances }: OrderListProps) {
       <ul className="flex flex-col gap-3 lg:hidden">
         {rows.map((row) => (
           <li key={row.id}>
-            <article className={cn("relative rounded-xl border border-sand bg-card p-4 shadow-(--shadow-card)", row.is_archived && "opacity-75")}>
+            <article className={cn("relative rounded-xl border border-line bg-card p-4 shadow-(--shadow-card)", row.is_archived && "opacity-75")}>
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <h3 className="truncate text-[0.9375rem] font-bold text-ink">

@@ -38,6 +38,19 @@ export function formatDateTime(value: string | null | undefined): string {
   return `${formatDate(value)}, ${time}`
 }
 
+/** "Thursday 08 Oct 2026" in Karachi time. */
+export function longToday(now: Date = new Date()): string {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: BUSINESS_TIME_ZONE,
+    weekday: "long",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).formatToParts(now)
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? ""
+  return `${get("weekday")} ${get("day")} ${get("month")} ${get("year")}`
+}
+
 /** Whole days from `from` to `to`, both `YYYY-MM-DD`. */
 export function daysBetween(from: string, to: string): number {
   const a = Date.UTC(...parts(from))

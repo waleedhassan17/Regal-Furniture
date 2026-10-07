@@ -48,7 +48,6 @@ export function Sidebar({ user }: { user: ShellUser }) {
       )}
 
       <nav className="flex-1 overflow-y-auto px-3 py-5 xl:px-4">
-        <p className="eyebrow mb-3 hidden px-3 text-sidebar-muted xl:block">Workspace</p>
         <ul className="flex flex-col gap-1">
           {items.map((item) => {
             const active = isActive(item, pathname)
@@ -60,13 +59,12 @@ export function Sidebar({ user }: { user: ShellUser }) {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative flex h-11 items-center justify-center gap-3 rounded-md px-3 text-sm font-semibold transition-colors duration-(--duration-fast) focus-visible:outline-sidebar-ring xl:justify-start",
+                      "flex h-11 items-center justify-center gap-3 rounded-md px-3 text-sm font-medium transition-colors duration-(--duration-fast) focus-visible:outline-sidebar-ring xl:justify-start",
                       active
                         ? "bg-sidebar-accent text-white"
-                        : "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 hover:text-white"
+                        : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-white"
                     )}
                   >
-                    {active && <span aria-hidden="true" className="absolute top-2.5 bottom-2.5 left-0 w-[3px] rounded-r-full bg-regal" />}
                     <Icon aria-hidden="true" className="size-[18px] shrink-0" />
                     <span className="sr-only xl:not-sr-only">{item.label}</span>
                   </Link>

@@ -43,8 +43,8 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
   }
 
   return (
-    <section aria-labelledby="items-heading" className="rounded-xl border border-sand bg-card shadow-(--shadow-card)">
-      <div className="flex flex-col gap-3 border-b border-sand px-5 py-4 sm:px-6">
+    <section aria-labelledby="items-heading" className="rounded-xl border border-line bg-card shadow-(--shadow-card)">
+      <div className="flex flex-col gap-3 border-b border-line px-5 py-4 sm:px-6">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h2 id="items-heading" className="text-h3 font-bold text-ink">
             Items <span className="font-semibold text-stone tabular">({items.length})</span>
@@ -56,7 +56,7 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
         <Progress tone="done" value={items.length ? (ready / items.length) * 100 : 0} aria-label={formatReadyProgress(ready, items.length)} />
       </div>
 
-      <ol className="divide-y divide-sand">
+      <ol className="divide-y divide-line">
         {optimisticItems.map((item, index) => {
           const details = [
             { label: "Size", value: item.size },
@@ -69,7 +69,7 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
                 <button
                   type="button"
                   onClick={() => setPhoto({ url: item.image_url as string, name: item.name })}
-                  className="group relative size-24 shrink-0 overflow-hidden rounded-lg border border-sand bg-sand-soft sm:size-28"
+                  className="group relative size-24 shrink-0 overflow-hidden rounded-lg border border-line bg-subtle sm:size-28"
                   aria-label={`View photo of ${item.name}`}
                 >
                   <Image src={item.image_url} alt="" fill unoptimized sizes="112px" className="object-cover transition-transform duration-(--duration-base) group-hover:scale-105" />
@@ -78,7 +78,7 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
                   </span>
                 </button>
               ) : item.image_path ? (
-                <div className="flex size-24 shrink-0 items-center justify-center rounded-lg border border-dashed border-sand-strong text-stone sm:size-28" title="Photo unavailable">
+                <div className="flex size-24 shrink-0 items-center justify-center rounded-lg border border-dashed border-line-strong text-stone sm:size-28" title="Photo unavailable">
                   <ImageOff aria-hidden="true" className="size-5" />
                 </div>
               ) : null}
@@ -108,7 +108,7 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
                     ))}
                   </dl>
                 )}
-                {item.note && <p className="rounded-md bg-sand-soft/70 px-3 py-2 text-sm leading-relaxed whitespace-pre-line text-ink">{item.note}</p>}
+                {item.note && <p className="rounded-md bg-subtle/70 px-3 py-2 text-sm leading-relaxed whitespace-pre-line text-ink">{item.note}</p>}
               </div>
             </li>
           )
@@ -122,7 +122,7 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
             <DialogDescription>Reference photo</DialogDescription>
           </DialogHeader>
           {photo && (
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-sand-soft">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-subtle">
               <Image src={photo.url} alt={`Reference photo for ${photo.name}`} fill unoptimized sizes="(max-width: 768px) 100vw, 768px" className="object-contain" />
             </div>
           )}
@@ -135,7 +135,7 @@ export function OrderItems({ orderId, items, canChangeStatus }: OrderItemsProps)
 /** Three-way switch: Pending · In production · Ready. Large targets for phones. */
 function ItemStatusSwitch({ value, onChange, disabled, label }: { value: ItemStatus; onChange: (v: ItemStatus) => void; disabled: boolean; label: string }) {
   return (
-    <div role="radiogroup" aria-label={`Status of ${label}`} className="inline-flex rounded-lg border border-sand-strong bg-paper p-0.5">
+    <div role="radiogroup" aria-label={`Status of ${label}`} className="inline-flex rounded-lg border border-line-strong bg-paper p-0.5">
       {ITEM_STATUSES.map((status) => {
         const active = status === value
         const tone = ITEM_STATUS_TONE[status]
@@ -160,7 +160,7 @@ function ItemStatusSwitch({ value, onChange, disabled, label }: { value: ItemSta
             tabIndex={active ? 0 : -1}
             className={cn(
               "h-11 rounded-md px-3 text-[0.75rem] font-bold whitespace-nowrap transition-colors duration-(--duration-fast) disabled:cursor-not-allowed sm:h-9",
-              active ? "shadow-(--shadow-card)" : "text-stone hover:bg-sand-soft hover:text-ink"
+              active ? "shadow-(--shadow-card)" : "text-stone hover:bg-subtle hover:text-ink"
             )}
             style={active ? { color: `var(--st-${tone}-fg)`, backgroundColor: `var(--st-${tone}-bg)` } : undefined}
           >

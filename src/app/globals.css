@@ -4,8 +4,9 @@
 
 /*
  * Regal Furnitures design tokens.
- * Source: brand/Regal_Furnitures_Brand_Identity.pdf (pages 4–6).
- * "Bone leads. Ink anchors. Crimson is the moment of conviction."
+ * Brand palette from brand/Regal_Furnitures_Brand_Identity.pdf (page 4): Regal Red is the
+ * moment of conviction, Ink anchors. App surfaces are calm off-white and white with neutral
+ * lines (owner's request, 2026-10-08); the warm Bone and Sand are kept for brand moments.
  * Every component reads from these tokens; do not hard-code colours elsewhere.
  */
 
@@ -19,15 +20,17 @@
   --walnut: #5a3a24;
   --charcoal: #2a2a2d;
 
-  /* Supporting neutrals, derived from the palette */
-  --paper: #fffdf9; /* card surface on Bone */
-  --sand-soft: #f0eadf; /* hover / subtle fill */
-  --sand-strong: #d8ccb8; /* stronger divider */
-  --stone: #6b6259; /* secondary text, 5.3:1 on Bone */
-  --field-border: #b3a691; /* form control outline */
+  /* App surfaces and lines (neutral, slightly warm) */
+  --canvas: #fafaf9; /* page background */
+  --paper: #ffffff; /* cards, inputs, menus */
+  --subtle: #f5f5f4; /* hover and quiet fills */
+  --line: #e7e5e4; /* borders and dividers */
+  --line-strong: #d6d3d1; /* stronger dividers, outline buttons */
+  --stone: #57534e; /* secondary text, 7.5:1 on white */
+  --field-border: #cfcac5; /* form control outline */
 
   /* Semantic (shadcn contract) */
-  --background: var(--bone);
+  --background: var(--canvas);
   --foreground: var(--ink);
   --card: var(--paper);
   --card-foreground: var(--ink);
@@ -35,14 +38,14 @@
   --popover-foreground: var(--ink);
   --primary: var(--regal);
   --primary-foreground: #ffffff;
-  --secondary: var(--sand-soft);
+  --secondary: var(--subtle);
   --secondary-foreground: var(--ink);
-  --muted: var(--sand-soft);
+  --muted: var(--subtle);
   --muted-foreground: var(--stone);
-  --accent: var(--sand-soft);
+  --accent: var(--subtle);
   --accent-foreground: var(--ink);
   --destructive: var(--regal);
-  --border: var(--sand);
+  --border: var(--line);
   --input: var(--field-border);
   --ring: var(--ink);
 
@@ -69,14 +72,14 @@
   --st-due-dot: #d98e04;
 
   --st-start-fg: var(--walnut);
-  --st-start-bg: #efe6d8;
-  --st-start-bd: #dccbb3;
+  --st-start-bg: #f4ede4;
+  --st-start-bd: #e3d5c3;
   --st-start-dot: #8b5e3c;
 
-  --st-track-fg: #4a4540;
-  --st-track-bg: #efebe4;
-  --st-track-bd: #ddd6cb;
-  --st-track-dot: #8c847a;
+  --st-track-fg: #44403c;
+  --st-track-bg: #f2f1ef;
+  --st-track-bd: #e2dfdb;
+  --st-track-dot: #8a847e;
 
   --st-done-fg: #2f5d3a;
   --st-done-bg: #e4efe5;
@@ -84,8 +87,8 @@
   --st-done-dot: #4c8b5c;
 
   --st-progress-fg: var(--charcoal);
-  --st-progress-bg: #eae7e3;
-  --st-progress-bd: #d6d1ca;
+  --st-progress-bg: #edecea;
+  --st-progress-bd: #dad7d3;
   --st-progress-dot: var(--charcoal);
 
   --st-ready-fg: #34536b;
@@ -99,14 +102,14 @@
   --st-hold-dot: #7d6888;
 
   --st-cancel-fg: var(--stone);
-  --st-cancel-bg: #efebe4;
-  --st-cancel-bd: #ddd6cb;
-  --st-cancel-dot: #a39a90;
+  --st-cancel-bg: #f2f1ef;
+  --st-cancel-bd: #e2dfdb;
+  --st-cancel-dot: #a8a29e;
 
   /* Shape + elevation */
   --radius: 0.625rem;
-  --shadow-card: 0 1px 2px rgb(35 31 32 / 0.04), 0 1px 1px rgb(35 31 32 / 0.02);
-  --shadow-raised: 0 12px 32px -12px rgb(35 31 32 / 0.18), 0 2px 6px rgb(35 31 32 / 0.06);
+  --shadow-card: 0 1px 2px rgb(28 25 23 / 0.04);
+  --shadow-raised: 0 10px 28px -12px rgb(28 25 23 / 0.16), 0 2px 6px rgb(28 25 23 / 0.05);
 
   /* Layout */
   --sidebar-width: 15.5rem;
@@ -156,11 +159,13 @@
   --color-regal: var(--regal);
   --color-crimson: var(--crimson);
   --color-sand: var(--sand);
-  --color-sand-soft: var(--sand-soft);
-  --color-sand-strong: var(--sand-strong);
   --color-walnut: var(--walnut);
   --color-charcoal: var(--charcoal);
+  --color-canvas: var(--canvas);
   --color-paper: var(--paper);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-stone: var(--stone);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -193,9 +198,6 @@
   --text-body--line-height: 1.55;
   --text-caption: 0.75rem;
   --text-caption--line-height: 1.35;
-  --text-eyebrow: 0.6875rem;
-  --text-eyebrow--line-height: 1.2;
-  --text-eyebrow--letter-spacing: 0.1em;
 }
 
 @layer base {
@@ -240,22 +242,9 @@
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-@utility eyebrow {
-  font-size: var(--text-eyebrow);
-  line-height: var(--text-eyebrow--line-height);
-  letter-spacing: var(--text-eyebrow--letter-spacing);
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
 @utility tap {
   min-height: var(--tap);
   min-width: var(--tap);
-}
-
-/* Hexagon — brand motif for icons, stat cards and empty states. Pointy-top, matching the mark. */
-@utility hex-clip {
-  clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
 }
 
 @utility scrollbar-none {

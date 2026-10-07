@@ -162,7 +162,7 @@ export function OrderFilters({ team, isAdmin }: { team: TeamMemberOption[]; isAd
         </Sheet>
       </div>
 
-      <div className="hidden rounded-xl border border-sand bg-card p-4 lg:block">{filterFields}</div>
+      <div className="hidden rounded-xl border border-line bg-card p-4 lg:block">{filterFields}</div>
 
       {chips.length > 0 && (
         <div className="flex flex-wrap items-center gap-2" aria-label="Active filters">
@@ -171,7 +171,7 @@ export function OrderFilters({ team, isAdmin }: { team: TeamMemberOption[]; isAd
               key={chip.key}
               type="button"
               onClick={() => navigate((next) => chip.keys.forEach((k) => next.delete(k)))}
-              className="inline-flex h-8 items-center gap-1.5 rounded-full border border-sand-strong bg-paper pr-2 pl-3 text-caption font-semibold text-ink hover:bg-sand-soft"
+              className="inline-flex h-8 items-center gap-1.5 rounded-full border border-line-strong bg-paper pr-2 pl-3 text-caption font-semibold text-ink hover:bg-subtle"
               aria-label={`Remove filter: ${chip.label}`}
             >
               {chip.label}

@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, BriefcaseBusiness, Hammer } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { HexFrame } from "@/components/brand/hexagon"
 import { SIGN_IN_ROLES, loginHref, type SignInRole } from "@/features/auth/roles"
 
 const ICON: Record<SignInRole, typeof Hammer> = {
@@ -26,17 +25,17 @@ export function RoleChooser({ next, layout = "grid", className }: RoleChooserPro
           <li key={role.value}>
             <Link
               href={loginHref(role.value, next)}
-              className="group flex h-full items-start gap-4 rounded-xl border border-sand bg-paper p-5 shadow-(--shadow-card) transition-[border-color,box-shadow,transform] duration-(--duration-base) ease-(--ease-out) hover:-translate-y-0.5 hover:border-regal/40 hover:shadow-(--shadow-raised) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              className="group flex h-full items-start gap-4 rounded-xl border border-line bg-paper p-5 transition-colors duration-(--duration-fast) hover:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
             >
-              <HexFrame size={44} stroke="var(--sand-strong)" fill="var(--bone)" className="transition-colors">
+              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-line bg-subtle">
                 <Icon aria-hidden="true" className="size-[18px] text-ink" />
-              </HexFrame>
+              </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center justify-between gap-2">
                   <span className="text-[1rem] font-semibold tracking-tight text-ink">{role.title}</span>
                   <ArrowRight
                     aria-hidden="true"
-                    className="size-4 shrink-0 text-stone transition-transform duration-(--duration-base) group-hover:translate-x-0.5 group-hover:text-regal"
+                    className="size-4 shrink-0 text-stone transition-transform duration-(--duration-base) group-hover:translate-x-0.5 group-hover:text-ink"
                   />
                 </span>
                 <span className="mt-1 block text-sm leading-relaxed text-stone">{role.description}</span>

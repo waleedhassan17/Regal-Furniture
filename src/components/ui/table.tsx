@@ -22,7 +22,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   return (
     <thead
       data-slot="table-header"
-      className={cn("bg-sand-soft/60 [&_tr]:border-b [&_tr]:border-sand", className)}
+      className={cn("bg-subtle/60 [&_tr]:border-b [&_tr]:border-line", className)}
       {...props}
     />
   )
@@ -56,7 +56,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     <tr
       data-slot="table-row"
       className={cn(
-        "border-b border-sand/80 transition-colors duration-(--duration-fast) hover:bg-sand-soft/50 has-aria-expanded:bg-sand-soft/50 data-[state=selected]:bg-sand-soft",
+        "border-b border-line/80 transition-colors duration-(--duration-fast) hover:bg-subtle/50 has-aria-expanded:bg-subtle/50 data-[state=selected]:bg-subtle",
         className
       )}
       {...props}
@@ -69,7 +69,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "h-11 px-4 text-left align-middle text-[0.6875rem] font-bold tracking-[0.1em] whitespace-nowrap text-stone uppercase first:pl-5 last:pr-5 [&:has([role=checkbox])]:pr-0",
+        "h-11 px-4 text-left align-middle text-[0.8125rem] font-medium whitespace-nowrap text-stone first:pl-5 last:pr-5 [&:has([role=checkbox])]:pr-0",
         className
       )}
       {...props}

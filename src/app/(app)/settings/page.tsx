@@ -13,7 +13,6 @@ export default function SettingsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Settings"
         title="Reminder settings"
         description="These decide when an order shows up on the dashboard as needing attention. Changes apply to every order straight away."
       />

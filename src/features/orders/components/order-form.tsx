@@ -210,8 +210,8 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
         <div className="flex min-w-0 flex-col gap-6">
           <div ref={alertRef}>{serverError && <FormAlert>{serverError}</FormAlert>}</div>
 
-          {/* 01 · Client */}
-          <Section number="01" title="Client" description="Search by name, company or phone, or add a new client.">
+          {/* Client */}
+          <Section title="Client" description="Search by name, company or phone, or add a new client.">
             <Field label="Client" htmlFor="order-client" error={errors.client_id?.message}>
               <ClientPicker
                 id="order-client"
@@ -238,8 +238,8 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
             </Field>
           </Section>
 
-          {/* 02 · Order details */}
-          <Section number="02" title="Order details">
+          {/* Order details */}
+          <Section title="Order details">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <Field label="Order date" htmlFor="order_date" error={errors.order_date?.message}>
                 <Input id="order_date" type="date" max={today} aria-invalid={!!errors.order_date} {...form.register("order_date")} />
@@ -270,7 +270,7 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
                       onClick={() =>
                         form.setValue("delivery_deadline", addDays(orderDate || today, option.days), { shouldDirty: true, shouldValidate: true })
                       }
-                      className="inline-flex h-9 items-center rounded-full border border-sand-strong bg-paper px-3 text-caption font-semibold text-ink hover:bg-sand-soft"
+                      className="inline-flex h-9 items-center rounded-full border border-line-strong bg-paper px-3 text-caption font-semibold text-ink hover:bg-subtle"
                     >
                       {option.label}
                     </button>
@@ -302,11 +302,10 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
             </Field>
           </Section>
 
-          {/* 03 · Items */}
+          {/* Items */}
           <section aria-labelledby="items-heading" className="flex flex-col gap-4">
             <SectionHeading
               id="items-heading"
-              number="03"
               title="Items"
               description={`${fields.length} ${fields.length === 1 ? "item" : "items"} · ${totalQuantity} ${totalQuantity === 1 ? "piece" : "pieces"} in total`}
             />
@@ -335,8 +334,8 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
             </Button>
           </section>
 
-          {/* 04 · Amounts (admin only — this form is only shown to admins) */}
-          <Section number="04" title="Amounts" description="Only admins see amounts. Leave blank if the price isn't agreed yet.">
+          {/* Amounts (admin only — this form is only shown to admins) */}
+          <Section title="Amounts" description="Only admins see amounts. Leave blank if the price isn't agreed yet.">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <Field label="Order amount" htmlFor="order_amount" error={errors.finance?.order_amount?.message} optional>
                 <RupeeInput id="order_amount" invalid={!!errors.finance?.order_amount} {...form.register("finance.order_amount")} />
@@ -345,7 +344,7 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
                 <RupeeInput id="delivery_charges" invalid={!!errors.finance?.delivery_charges} {...form.register("finance.delivery_charges")} />
               </Field>
             </div>
-            <dl className="grid gap-2 rounded-lg bg-sand-soft/70 p-4 text-sm tabular">
+            <dl className="grid gap-2 rounded-lg bg-subtle/70 p-4 text-sm tabular">
               <Row label="Grand total" value={money.grandTotal === null ? "Not set" : formatMoney(money.grandTotal)} strong />
               {mode === "edit" && (
                 <>
@@ -363,8 +362,8 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
 
         {/* Summary + save (sticky on desktop) */}
         <aside className="hidden lg:sticky lg:top-8 lg:block">
-          <div className="rounded-xl border border-sand bg-paper p-5 shadow-(--shadow-card)">
-            <p className="eyebrow text-regal">Summary</p>
+          <div className="rounded-xl border border-line bg-paper p-5">
+            <h2 className="text-[1.0625rem] font-semibold tracking-tight text-ink">Summary</h2>
             <dl className="mt-4 flex flex-col gap-3 text-sm">
               <SummaryRow label="Client" value={client?.name ?? "Not chosen"} muted={!client} />
               <SummaryRow
@@ -386,7 +385,7 @@ export function OrderForm({ mode, initial, team, today, cancelHref }: OrderFormP
         </aside>
 
         {/* Phone action bar, above the bottom navigation */}
-        <div className="fixed inset-x-0 bottom-[calc(var(--bottom-nav-height)+env(safe-area-inset-bottom))] z-30 border-t border-sand bg-paper/95 px-4 py-3 backdrop-blur lg:hidden">
+        <div className="fixed inset-x-0 bottom-[calc(var(--bottom-nav-height)+env(safe-area-inset-bottom))] z-30 border-t border-line bg-paper/95 px-4 py-3 backdrop-blur lg:hidden">
           <div className="mx-auto flex max-w-xl items-center gap-3">
             <div className="min-w-0 flex-1 text-caption text-stone">
               <p className="truncate font-semibold text-ink">{client?.name ?? "No client yet"}</p>
@@ -427,23 +426,22 @@ function SaveButton({ pending, uploading, disabled, label, compact }: { pending:
   )
 }
 
-function Section({ number, title, description, children }: { number: string; title: string; description?: string; children: React.ReactNode }) {
-  const id = `section-${number}`
+function Section({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
+  const id = `section-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`
   return (
-    <section aria-labelledby={id} className="rounded-xl border border-sand bg-card shadow-(--shadow-card)">
-      <div className="border-b border-sand px-5 py-4 sm:px-6">
-        <SectionHeading id={id} number={number} title={title} description={description} />
+    <section aria-labelledby={id} className="rounded-xl border border-line bg-card">
+      <div className="border-b border-line px-5 py-4 sm:px-6">
+        <SectionHeading id={id} title={title} description={description} />
       </div>
       <div className="flex flex-col gap-5 px-5 py-5 sm:px-6">{children}</div>
     </section>
   )
 }
 
-function SectionHeading({ id, number, title, description }: { id: string; number: string; title: string; description?: string }) {
+function SectionHeading({ id, title, description }: { id: string; title: string; description?: string }) {
   return (
     <div>
-      <p className="eyebrow text-regal">{number}</p>
-      <h2 id={id} className="mt-1 font-heading text-[1.25rem] leading-tight font-semibold tracking-tight text-ink">
+      <h2 id={id} className="text-[1.0625rem] font-semibold tracking-tight text-ink">
         {title}
       </h2>
       {description && <p className="mt-1 text-sm text-stone">{description}</p>}

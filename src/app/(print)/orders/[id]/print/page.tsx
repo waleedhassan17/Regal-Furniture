@@ -44,7 +44,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
 
   return (
     <>
-      <div className="no-print sticky top-0 z-10 border-b border-sand bg-paper/95 backdrop-blur">
+      <div className="no-print sticky top-0 z-10 border-b border-line bg-paper/95 backdrop-blur">
         <div className="mx-auto flex max-w-[210mm] items-center justify-between gap-3 px-4 py-3">
           <Button asChild variant="ghost">
             <Link href={`/orders/${order.id}`}>
@@ -68,7 +68,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
           </div>
         </header>
 
-        <section className="mt-4 grid grid-cols-4 gap-x-4 gap-y-3 border-b border-sand-strong pb-4 text-[9.5pt]">
+        <section className="mt-4 grid grid-cols-4 gap-x-4 gap-y-3 border-b border-line-strong pb-4 text-[9.5pt]">
           <Info label="Client" className="col-span-2">
             <span className="text-[12pt] font-bold">{order.client_name}</span>
             {order.client_phone && <span className="block text-stone">{order.client_phone}</span>}
@@ -100,7 +100,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
           <thead className="hidden print:table-header-group">
             <tr>
               <td className="p-0">
-                <div className="flex justify-between border-b border-sand-strong pb-1 text-[7.5pt] text-stone">
+                <div className="flex justify-between border-b border-line-strong pb-1 text-[7.5pt] text-stone">
                   <span>
                     <strong className="font-bold text-ink">{order.order_number}</strong> · {order.client_name}
                   </span>
@@ -119,7 +119,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
               <tr key={item.id} className="job-block">
               <td className="p-0">
               <div className="flex border border-ink text-[9pt] leading-snug">
-                <div className="flex w-[8mm] shrink-0 justify-center border-r border-ink bg-sand-soft pt-1.5 text-[10.5pt] font-bold tabular print:bg-[#f0eadf]">
+                <div className="flex w-[8mm] shrink-0 justify-center border-r border-ink bg-subtle pt-1.5 text-[10.5pt] font-bold tabular print:bg-[#f0eadf]">
                   {index + 1}
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col gap-1 px-2.5 py-1.5">
@@ -141,7 +141,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
                     </p>
                   )}
                   {item.note && (
-                    <p className="border-l-2 border-sand-strong pl-2 whitespace-pre-line">
+                    <p className="border-l-2 border-line-strong pl-2 whitespace-pre-line">
                       <span className="mr-1 text-[7pt] font-bold tracking-[0.08em] text-stone uppercase">Note</span>
                       {item.note}
                     </p>
@@ -167,7 +167,7 @@ async function JobSheet({ params }: { params: PageProps<"/orders/[id]/print">["p
           </tbody>
         </table>
 
-        <footer className="mt-6 flex items-end justify-between gap-4 border-t border-sand-strong pt-3 text-[8pt] text-stone">
+        <footer className="mt-6 flex items-end justify-between gap-4 border-t border-line-strong pt-3 text-[8pt] text-stone">
           <span>
             Printed {formatDateTime(new Date().toISOString())} · {order.order_number} · {order.client_name}
           </span>

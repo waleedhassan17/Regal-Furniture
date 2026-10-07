@@ -6,19 +6,12 @@ import { formatItemSummary } from "@/lib/format/items"
 import { StatusControl } from "@/features/orders/components/status-control"
 import type { OrderListRow } from "@/features/orders/queries"
 
-const ACCENT: Record<string, string> = {
-  overdue: "var(--st-overdue-dot)",
-  due_soon: "var(--st-due-dot)",
-  needs_to_start: "var(--st-start-dot)",
-}
-
 /** Most urgent first: who, what, how long is left, current status, and who is responsible. */
 export function AttentionList({ rows }: { rows: OrderListRow[] }) {
   return (
-    <ul className="divide-y divide-sand">
+    <ul className="divide-y divide-line">
       {rows.map((row) => (
-        <li key={row.id} className="relative flex flex-col gap-3 py-4 pr-4 pl-5 sm:flex-row sm:items-center sm:gap-4 sm:pr-5 sm:pl-6">
-          <span aria-hidden="true" className="absolute top-3 bottom-3 left-0 w-[3px] rounded-r-full" style={{ backgroundColor: ACCENT[row.attention_level ?? ""] }} />
+        <li key={row.id} className="relative flex flex-col gap-3 px-5 py-4 transition-colors hover:bg-subtle/50 sm:flex-row sm:items-center sm:gap-4 sm:px-6">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <Link

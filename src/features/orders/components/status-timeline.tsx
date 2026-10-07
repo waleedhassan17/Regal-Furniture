@@ -22,7 +22,7 @@ export function StatusTimeline({ entries }: { entries: Entry[] }) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ol className="relative flex flex-col gap-5 before:absolute before:top-2 before:bottom-2 before:left-[5px] before:w-px before:bg-sand-strong">
+        <ol className="relative flex flex-col gap-5 before:absolute before:top-2 before:bottom-2 before:left-[5px] before:w-px before:bg-line-strong">
           {entries.map((e) => (
             <li key={e.id} className="relative pl-6">
               <span

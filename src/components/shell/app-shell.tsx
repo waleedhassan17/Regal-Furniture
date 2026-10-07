@@ -49,7 +49,7 @@ function NavFallback() {
           ))}
         </div>
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-40 h-(--bottom-nav-height) border-t border-sand bg-paper lg:hidden" />
+      <div className="fixed inset-x-0 bottom-0 z-40 h-(--bottom-nav-height) border-t border-line bg-paper lg:hidden" />
     </>
   )
 }

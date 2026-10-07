@@ -44,9 +44,9 @@ export function ItemCard({ index, count, orderId, savedUrl, isSavedPath, onDupli
   return (
     <article
       aria-labelledby={fieldId("heading")}
-      className="rounded-xl border border-sand bg-paper shadow-(--shadow-card) transition-shadow focus-within:border-sand-strong"
+      className="rounded-xl border border-line bg-paper shadow-(--shadow-card) transition-shadow focus-within:border-line-strong"
     >
-      <header className="flex items-center justify-between gap-2 border-b border-sand py-2 pr-2 pl-4">
+      <header className="flex items-center justify-between gap-2 border-b border-line py-2 pr-2 pl-4">
         <h3 id={fieldId("heading")} className="flex min-w-0 items-center gap-2.5 text-sm font-bold text-ink">
           <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-ink text-[0.6875rem] text-bone tabular">
             {index + 1}
@@ -122,7 +122,7 @@ export function ItemCard({ index, count, orderId, savedUrl, isSavedPath, onDupli
           <CollapsibleTrigger asChild>
             <button
               type="button"
-              className="flex h-11 w-full items-center justify-between rounded-md border border-dashed border-sand-strong px-3 text-sm font-semibold text-ink hover:bg-sand-soft/60"
+              className="flex h-11 w-full items-center justify-between rounded-md border border-dashed border-line-strong px-3 text-sm font-semibold text-ink hover:bg-subtle/60"
             >
               <span>
                 More details
