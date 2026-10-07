@@ -15,7 +15,8 @@
     "create-admin": "node --env-file-if-exists=.env.local --import tsx scripts/create-admin.ts",
     "db:seed": "node --env-file-if-exists=.env.local --import tsx scripts/seed.ts",
     "db:seed:clear": "node --env-file-if-exists=.env.local --import tsx scripts/seed-clear.ts",
-    "rls:check": "node --env-file-if-exists=.env.local --import tsx scripts/rls-check.ts"
+    "rls:check": "node --env-file-if-exists=.env.local --import tsx scripts/rls-check.ts",
+    "db:check-dashboard": "node --env-file-if-exists=.env.local --import tsx scripts/check-dashboard.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

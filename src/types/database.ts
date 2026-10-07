@@ -16,6 +16,7 @@ export type Database = {
           address: string | null
           city: string | null
           notes: string | null
+          phone_digits: string | null
           is_seed: boolean
           created_by: string | null
           created_at: string
@@ -30,6 +31,7 @@ export type Database = {
           address?: string | null
           city?: string | null
           notes?: string | null
+          phone_digits?: never
           is_seed?: boolean
           created_by?: string | null
           created_at?: string
@@ -44,6 +46,7 @@ export type Database = {
           address?: string | null
           city?: string | null
           notes?: string | null
+          phone_digits?: never
           is_seed?: boolean
           created_by?: string | null
           created_at?: string

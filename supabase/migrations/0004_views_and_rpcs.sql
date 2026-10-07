@@ -67,7 +67,7 @@ select
   o.client_id,
   c.name as client_name,
   c.phone as client_phone,
-  regexp_replace(coalesce(c.phone, '') || ' ' || coalesce(c.alt_phone, ''), '\D', '', 'g') as client_phone_digits,
+  c.phone_digits as client_phone_digits,
   c.company as client_company,
   c.city as client_city,
   o.delivery_address,

@@ -1,0 +1,29 @@
+/* A4 job sheet. Each item block stays on one page; long orders flow onto more pages. */
+@page {
+  size: A4;
+  margin: 12mm 12mm 14mm;
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font: 8pt var(--font-montserrat), sans-serif;
+    color: #6b6259;
+  }
+}
+
+@media print {
+  .job-sheet {
+    font-size: 9.5pt;
+  }
+  .job-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .job-sheet header,
+  .job-sheet section {
+    break-inside: avoid;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+

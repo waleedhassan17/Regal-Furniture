@@ -72,6 +72,10 @@ create table public.clients (
   address text check (char_length(address) <= 500),
   city text check (char_length(city) <= 80),
   notes text check (char_length(notes) <= 2000),
+  -- Digits of both phone numbers, so "03001234567" finds "0300-123 4567".
+  phone_digits text generated always as (
+    regexp_replace(coalesce(phone, '') || ' ' || coalesce(alt_phone, ''), '\D', '', 'g')
+  ) stored,
   is_seed boolean not null default false,
   created_by uuid default auth.uid() references public.profiles (id) on delete set null,
   created_at timestamptz not null default now(),
@@ -79,7 +83,7 @@ create table public.clients (
 );
 
 create index clients_name_trgm_idx on public.clients using gin (name extensions.gin_trgm_ops);
-create index clients_phone_trgm_idx on public.clients using gin (phone extensions.gin_trgm_ops);
+create index clients_phone_digits_trgm_idx on public.clients using gin (phone_digits extensions.gin_trgm_ops);
 create index clients_company_trgm_idx on public.clients using gin (company extensions.gin_trgm_ops);
 create index clients_name_idx on public.clients (name);
 
