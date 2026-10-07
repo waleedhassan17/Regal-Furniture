@@ -128,3 +128,4 @@ tests/                database-backed tests
 1. Copy the lockup and mark (SVG preferred) into `public/brand/`.
 2. Fill in their paths and sizes in `brand-assets.ts`.
 3. Replace `src/app/icon.svg` with the mark.
+# Regal-Furniture
