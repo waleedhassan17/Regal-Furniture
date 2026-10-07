@@ -15,6 +15,7 @@ Internal order-tracking portal for Regal Furnitures (Pakistani furniture maker).
 - `npm run create-admin` — first admin from `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`
 - `npm run db:seed` / `npm run db:seed:clear` — demo data (rows flagged `is_seed`); never clear without asking the owner
 - `npm run rls:check` — signs in as admin / staff / no-profile users and asserts what each can reach
+- `npm run db:check-dashboard` — recomputes dashboard numbers with independent SQL and compares
 
 ## Folder conventions
 - `src/app/(auth)` login + password flows; `src/app/(app)` the signed-in portal; route files stay thin.
