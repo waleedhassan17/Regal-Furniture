@@ -51,3 +51,16 @@ describe("formatDaysLeft", () => {
     expect(formatDaysLeft(-3)).toBe("3 days overdue")
   })
 })
+
+import { greeting, longToday } from "@/lib/format/greeting"
+
+describe("greeting", () => {
+  it("uses Karachi time of day", () => {
+    expect(greeting(new Date("2026-10-08T03:00:00Z"))).toBe("Good morning") // 08:00 PKT
+    expect(greeting(new Date("2026-10-08T09:00:00Z"))).toBe("Good afternoon") // 14:00 PKT
+    expect(greeting(new Date("2026-10-08T14:00:00Z"))).toBe("Good evening") // 19:00 PKT
+  })
+  it("writes the long date", () => {
+    expect(longToday(new Date("2026-10-08T03:00:00Z"))).toBe("Thursday 08 Oct 2026")
+  })
+})

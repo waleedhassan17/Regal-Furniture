@@ -85,7 +85,7 @@ Use proper foreign keys, check constraints, enums for statuses, and indexes on t
 3. Needs to start — status is New and either the deadline is within the start-warning days or the order was created more than the grace days ago.
 4. On track — everything else.
 
-Keep this logic in one place and cover it, along with the money calculations, with unit tests including boundary dates. *(Implementation: the single source is the SQL function `compute_attention`, used by the `order_overview` view; it is tested from Vitest against the database.)*
+Keep this logic in one place and cover it, along with the money calculations, with unit tests including boundary dates. *(Implementation: the single source is the SQL function `compute_attention`, used by the `order_overview` view; it is tested from Vitest against the database. "Created" is read as the earlier of the order date and the day the order was entered, so a back-dated order is flagged as soon as it is entered.)*
 
 **Formats.** Money in PKR as `Rs 125,000`, no decimals. Dates displayed as `08 Oct 2026`. Days left phrased as "5 days left", "Due today", "3 days overdue".
 
