@@ -1,0 +1,46 @@
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+function Card({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card"
+      className={cn("rounded-xl border border-sand bg-card text-card-foreground shadow-(--shadow-card)", className)}
+      {...props}
+    />
+  )
+}
+
+function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-header"
+      className={cn("flex flex-wrap items-start justify-between gap-x-4 gap-y-2 border-b border-sand px-5 py-4 sm:px-6", className)}
+      {...props}
+    />
+  )
+}
+
+function CardTitle({ className, ...props }: React.ComponentProps<"h2">) {
+  return <h2 data-slot="card-title" className={cn("text-h3 font-bold text-ink", className)} {...props} />
+}
+
+function CardDescription({ className, ...props }: React.ComponentProps<"p">) {
+  return <p data-slot="card-description" className={cn("text-sm text-stone", className)} {...props} />
+}
+
+function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-content" className={cn("px-5 py-5 sm:px-6", className)} {...props} />
+}
+
+function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn("flex items-center gap-3 rounded-b-xl border-t border-sand bg-sand-soft/50 px-5 py-3.5 sm:px-6", className)}
+      {...props}
+    />
+  )
+}
+
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }

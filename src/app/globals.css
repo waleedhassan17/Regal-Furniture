@@ -1,0 +1,276 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Regal Furnitures design tokens.
+ * Source: brand/Regal_Furnitures_Brand_Identity.pdf (pages 4–6).
+ * "Bone leads. Ink anchors. Crimson is the moment of conviction."
+ * Every component reads from these tokens; do not hard-code colours elsewhere.
+ */
+
+:root {
+  /* Brand palette */
+  --bone: #f5f1ea;
+  --ink: #231f20;
+  --regal: #c42126;
+  --crimson: #8e1620;
+  --sand: #e8e0d2;
+  --walnut: #5a3a24;
+  --charcoal: #2a2a2d;
+
+  /* Supporting neutrals, derived from the palette */
+  --paper: #fffdf9; /* card surface on Bone */
+  --sand-soft: #f0eadf; /* hover / subtle fill */
+  --sand-strong: #d8ccb8; /* stronger divider */
+  --stone: #6b6259; /* secondary text, 5.3:1 on Bone */
+  --field-border: #b3a691; /* form control outline */
+
+  /* Semantic (shadcn contract) */
+  --background: var(--bone);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--regal);
+  --primary-foreground: #ffffff;
+  --secondary: var(--sand-soft);
+  --secondary-foreground: var(--ink);
+  --muted: var(--sand-soft);
+  --muted-foreground: var(--stone);
+  --accent: var(--sand-soft);
+  --accent-foreground: var(--ink);
+  --destructive: var(--regal);
+  --border: var(--sand);
+  --input: var(--field-border);
+  --ring: var(--ink);
+
+  /* Dark surfaces (sidebar, statement bands) */
+  --sidebar: var(--ink);
+  --sidebar-foreground: #ece6dc;
+  --sidebar-muted: #a8a099;
+  --sidebar-primary: var(--regal);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #34302f;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #3a3536;
+  --sidebar-ring: var(--bone);
+
+  /* Attention + status colours: text / background / border / dot. All text pairs ≥ 4.5:1. */
+  --st-overdue-fg: #a31b20;
+  --st-overdue-bg: #fbe9e7;
+  --st-overdue-bd: #f0c4bf;
+  --st-overdue-dot: var(--regal);
+
+  --st-due-fg: #7a4a00;
+  --st-due-bg: #fcf1dc;
+  --st-due-bd: #efd6a3;
+  --st-due-dot: #d98e04;
+
+  --st-start-fg: var(--walnut);
+  --st-start-bg: #efe6d8;
+  --st-start-bd: #dccbb3;
+  --st-start-dot: #8b5e3c;
+
+  --st-track-fg: #4a4540;
+  --st-track-bg: #efebe4;
+  --st-track-bd: #ddd6cb;
+  --st-track-dot: #8c847a;
+
+  --st-done-fg: #2f5d3a;
+  --st-done-bg: #e4efe5;
+  --st-done-bd: #c3d9c6;
+  --st-done-dot: #4c8b5c;
+
+  --st-progress-fg: var(--charcoal);
+  --st-progress-bg: #eae7e3;
+  --st-progress-bd: #d6d1ca;
+  --st-progress-dot: var(--charcoal);
+
+  --st-ready-fg: #34536b;
+  --st-ready-bg: #e5ecf1;
+  --st-ready-bd: #c5d3de;
+  --st-ready-dot: #4a7192;
+
+  --st-hold-fg: #5b4a63;
+  --st-hold-bg: #ece6ee;
+  --st-hold-bd: #d6cbda;
+  --st-hold-dot: #7d6888;
+
+  --st-cancel-fg: var(--stone);
+  --st-cancel-bg: #efebe4;
+  --st-cancel-bd: #ddd6cb;
+  --st-cancel-dot: #a39a90;
+
+  /* Shape + elevation */
+  --radius: 0.625rem;
+  --shadow-card: 0 1px 2px rgb(35 31 32 / 0.04), 0 1px 1px rgb(35 31 32 / 0.02);
+  --shadow-raised: 0 12px 32px -12px rgb(35 31 32 / 0.18), 0 2px 6px rgb(35 31 32 / 0.06);
+
+  /* Layout */
+  --sidebar-width: 15.5rem;
+  --sidebar-width-collapsed: 4.75rem;
+  --header-height: 4rem;
+  --bottom-nav-height: 4.25rem;
+  --tap: 2.75rem; /* 44px minimum tap target */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-bone: var(--bone);
+  --color-ink: var(--ink);
+  --color-regal: var(--regal);
+  --color-crimson: var(--crimson);
+  --color-sand: var(--sand);
+  --color-sand-soft: var(--sand-soft);
+  --color-sand-strong: var(--sand-strong);
+  --color-walnut: var(--walnut);
+  --color-charcoal: var(--charcoal);
+  --color-paper: var(--paper);
+  --color-stone: var(--stone);
+
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+}
+
+/* Type scale — brand page 6 (Display 64/72, H1 42/48, H2 28/34, H3 18/24), tuned for screens. */
+@theme {
+  --text-display: 3.5rem;
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.01em;
+  --text-h1: 2.25rem;
+  --text-h1--line-height: 1.15;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.25;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.35;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.55;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.35;
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.12em;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background text-foreground text-body antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--regal) 18%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+@utility eyebrow {
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@utility tap {
+  min-height: var(--tap);
+  min-width: var(--tap);
+}
+
+/* Hexagon — brand motif for icons, stat cards and empty states. Pointy-top, matching the mark. */
+@utility hex-clip {
+  clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Print: job sheets render on A4 with no app chrome. */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
